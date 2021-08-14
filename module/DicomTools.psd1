@@ -15,7 +15,7 @@ RootModule = 'lib\DicomTools.dll'
 ModuleVersion = '0.0.1'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @('Core')
 
 # ID used to uniquely identify this module
 GUID = 'd14fb1cb-55ed-449d-b8b5-c38f63af482e'
@@ -33,7 +33,7 @@ Copyright = '(c) 2021 Rob Holme. All rights reserved.'
 Description = 'Powershell tool for DICOM testing. Uses fo-dicom library'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
