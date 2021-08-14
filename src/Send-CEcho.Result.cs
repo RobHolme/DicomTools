@@ -1,5 +1,5 @@
 /// <summary>
-    /// An object containing the results to be returned to the pipeline for Send-CEcho commandlet.
+    /// An object containing the results to be returned to the pipeline for Send-CEcho cmdlet.
     /// </summary>
 
 namespace DicomTools {
