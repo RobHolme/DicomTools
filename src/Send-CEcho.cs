@@ -4,8 +4,6 @@ namespace DicomTools
     using System.Diagnostics;
 	using System.Management.Automation;
 	using Dicom.Network;
-//	using Dicom.Network.Client;
-
 		
 	[Cmdlet(VerbsCommunications.Send, "CEcho")]
     public class SendCEcho : PSCmdlet
