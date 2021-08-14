@@ -23,6 +23,8 @@ namespace DicomTools
         // Hostname or IP Address of DICOM service
         [Parameter(
             Mandatory = true,
+			ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
             Position = 1,
             HelpMessage = "Hostname or IP Address of DICOM service"
         )]
