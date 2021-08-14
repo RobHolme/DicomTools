@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include=".\src\*.cs"> 
+    <Compile Include=".\src\**\*.cs"> 
       <Link>notimportant</Link>
     </Compile>
   </ItemGroup>
