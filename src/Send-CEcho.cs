@@ -13,9 +13,11 @@ namespace DicomTools
 		
 		 private string dicomRemoteHost;
 		 private int dicomRemoteHostPort;
-		 private string callingDicomAeTitle = "SCU";
+		 private string callingDicomAeTitle = "DICOMTOOLS";
 		 private string calledDicomAeTitle = "ANY-SCP";
 		 private bool useTls = false;
+		 private string responseStatus = "Failed";
+		 private string verboseString;
 
 
         // Hostname or IP Address of DICOM service
@@ -98,19 +100,40 @@ namespace DicomTools
 
 				cEchoRequest.OnResponseReceived += (request, response) =>
 				{
-				   var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, response.Status.ToString(), 0);
-				   WriteObject(result);
+					responseStatus = response.Status.ToString();
 				};
 
+				client.AssociationRejected += (sender, eventArgs) =>
+            	{
+					responseStatus = $"Association was rejected. Reason:{eventArgs.Reason}";
+            	};
+
+
+            	client.AssociationAccepted += (sender, eventArgs) =>
+           		{
+                	verboseString += $"Association was accepted by:{eventArgs.Association.RemoteHost}";
+            	};
+
+				// send an async request, wait for response (Powershell output can't be from a thread).
 				client.AddRequestAsync(cEchoRequest);
-				//client.AddRequest(cEchoRequest);
-				client.SendAsync();
+				var task = client.SendAsync();
+				task.Wait();
+				if (verboseString.Length > 0) {
+					WriteVerbose(verboseString);
+				}
+
+				// write the results to the pipeline
+				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, 0);
+				WriteObject(result);
 
             }
             catch (Exception e)
-            {
+            {	
+				// typically network connection errors will trigger exceptions (remote host unreachable) 
+				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, "Failed: " + e.InnerException.Message, 0);
+				WriteObject(result);
                 //In real life, do something about this exception
-                WriteWarning($"Error occured during DICOM verification request -> {e.StackTrace}");
+                WriteDebug($"Exception: -> {e}");
             }
         }   
 	}

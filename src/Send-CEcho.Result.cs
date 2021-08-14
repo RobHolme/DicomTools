@@ -29,6 +29,25 @@ namespace DicomTools {
             set { this.port = value; }
         }
 
+		/// <summary>
+        /// The status of the CEcho request
+        /// </summary>
+        public string Status
+        {
+            get { return this.status; }
+            set { this.status = value; }
+        }
+
+		/// <summary>
+        /// The time taken to complete the request
+        /// </summary>
+        public long ResponseTime
+        {
+            get { return this.responseTime; }
+            set { this.responseTime = value; }
+        }
+
+
         /// <summary>
         /// Populate the class members with resuls from the C-Echo
         /// </summary>
