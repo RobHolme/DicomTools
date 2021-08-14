@@ -18,6 +18,7 @@ namespace DicomTools
 		 private bool useTls = false;
 		 private string responseStatus = "Failed";
 		 private string verboseString;
+		 private int timeoutInSeconds = 5;
 
 
         // Hostname or IP Address of DICOM service
@@ -72,13 +73,13 @@ namespace DicomTools
             set { this.calledDicomAeTitle = value; }
         }   
 
-		// The server called AE title
+		// Use TLS for the connection
         [Parameter(
             Mandatory = false,
             Position = 5,
             HelpMessage = "Use TLS to secure the connection"
         )]
-        public bool UseTLS
+        public SwitchParameter UseTLS
         {
             get { return this.useTls; }
             set { this.useTls = value; }
@@ -97,7 +98,7 @@ namespace DicomTools
 			
 			try
             {
-				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle,5000,5000,5000,5000);
+				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
 				var cEchoRequest = new DicomCEchoRequest();
 
 				cEchoRequest.OnResponseReceived += (request, response) =>
@@ -110,13 +111,12 @@ namespace DicomTools
 					responseStatus = $"Association was rejected. Reason:{eventArgs.Reason}";
             	};
 
-
             	client.AssociationAccepted += (sender, eventArgs) =>
            		{
                 	verboseString += $"Association was accepted by:{eventArgs.Association.RemoteHost}";
             	};
 
-				// send an async request, wait for response (Powershell output can't be from a thread).
+				// send an async request, wait for response (Powershell output can't be from a thread). Record connection time.
 				Stopwatch timer = new Stopwatch() ; 
 				client.AddRequestAsync(cEchoRequest);
 				timer.Start();
