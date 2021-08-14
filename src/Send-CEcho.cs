@@ -4,7 +4,7 @@ namespace DicomTools
     using System.Diagnostics;
 	using System.Management.Automation;
 	using Dicom.Network;
-	using Dicom.Network.Client;
+//	using Dicom.Network.Client;
 
 		
 	[Cmdlet(VerbsCommunications.Send, "CEcho")]
@@ -117,15 +117,18 @@ namespace DicomTools
             	};
 
 				// send an async request, wait for response (Powershell output can't be from a thread).
+				Stopwatch timer = new Stopwatch() ; 
 				client.AddRequestAsync(cEchoRequest);
+				timer.Start();
 				var task = client.SendAsync();
 				task.Wait();
+				timer.Stop();
 				if (verboseString.Length > 0) {
 					WriteVerbose(verboseString);
 				}
 
 				// write the results to the pipeline
-				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, 0);
+				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, timer.ElapsedMilliseconds);
 				WriteObject(result);
 
             }

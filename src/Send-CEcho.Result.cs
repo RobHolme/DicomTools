@@ -9,7 +9,7 @@ namespace DicomTools {
         private string hostname;
 		private int port;
         private string status;
-		private long responseTime;
+		private double responseTime;
 
         /// <summary>
         /// The hostname of the DICOM interface
@@ -41,9 +41,9 @@ namespace DicomTools {
 		/// <summary>
         /// The time taken to complete the request
         /// </summary>
-        public long ResponseTime
+        public double ResponseTime
         {
-            get { return this.responseTime; }
+            get { return responseTime; }
             set { this.responseTime = value; }
         }
 
@@ -52,7 +52,7 @@ namespace DicomTools {
         /// Populate the class members with resuls from the C-Echo
         /// </summary>
         /// <param name="ItemValue"></param>
-        public SendCEchoResult(string Hostname, int Port, string Status, long ResponseTime)
+        public SendCEchoResult(string Hostname, int Port, string Status, double ResponseTime)
         {
             this.hostname = Hostname;
 			this.port = Port;

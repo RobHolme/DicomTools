@@ -33,7 +33,9 @@
 							<PropertyName>Port</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
-							<PropertyName>ResponseTime</PropertyName>
+							<ScriptBlock>
+								"$($_.ResponseTime) ms"
+							</ScriptBlock>
 						</TableColumnItem>
 						<TableColumnItem>
 							<ScriptBlock>
