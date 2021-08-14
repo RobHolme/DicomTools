@@ -1,0 +1,89 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+	<Version>0.1.0</Version>
+	<Authors>Rob Holme</Authors>
+	<Product>DICOM Testing Module for Powershell Core</Product>
+    <FileVersion>0.1.0.0</FileVersion>
+    <Description>Powershell Core module for DICOM testing</Description>
+	<RepositoryUrl>https://github.com/RobHolme/DICOMTools</RepositoryUrl>
+    <PostBuildEvent>XCOPY /Y "$(TargetDir)hl7tools.dll" "$(ProjectDir).\module\lib\"</PostBuildEvent>
+  </PropertyGroup>
+
+
+ 
+  <ItemGroup>
+    <Compile Include=".\src\*.cs"> 
+      <Link>notimportant</Link>
+    </Compile>
+  </ItemGroup>
+
+<ItemGroup>
+    <Compile Remove="\src\FO-DICOM.Core\Compatibility\**" />
+    <EmbeddedResource Remove="\src\FO-DICOM.Core\Compatibility\**" />
+    <None Remove="\src\FO-DICOM.Core\Compatibility\**" />
+    <None Include="..\FellowOakSquareTransp.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="\src\FO-DICOM.Core\DatabaseQueryTransformRule.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\AndroidImage.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\AndroidImageManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\DesktopTranscoderManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\DicomJpegNativeCodec.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\DicomJpegProcess4Codec.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\DicomJpegProcess4Codec.Mono.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\DicomRleCodecImpl.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\NativeJpeg2000ParametersExtensions.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\NativeJpegLsParametersExtensions.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\NativeJpegParametersExtensions.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\Codec\NativePixelDataExtensions.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\IOSImage.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\IOSImageManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\UnityImage.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\UnityImageManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\WindowsImage.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\WindowsImageManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\WinFormsImage.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\WinFormsImageManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\WPFImage.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Imaging\WPFImageManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\IO\WindowsFileReference.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\IO\WindowsIOManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Network\WindowsNetworkListener.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Network\WindowsNetworkManager.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Network\WindowsNetworkStream.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Printing\FilmBoxExtensions.cs" />
+    <Compile Remove="\src\FO-DICOM.Core\Printing\ImageBoxExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="\src\FO-DICOM.Core\Dictionaries\DICOMDictionary.xml.gz" />
+    <None Remove="\src\FO-DICOM.Core\Dictionaries\PrivateDictionary.xml.gz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="\src\FO-DICOM.Core\Dictionaries\DICOMDictionary.xml.gz" />
+    <EmbeddedResource Include="\src\FO-DICOM.Core\Dictionaries\PrivateDictionary.xml.gz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0"/>
+  </ItemGroup>
+
+
+ 
+
+
+
+</Project>
