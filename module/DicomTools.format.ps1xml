@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
 <ViewDefinitions>
-<!-- default table view for Select-HL7Item -->	
 	<View> 
 		<Name>SendCEchoResult</Name>
 		<ViewSelectedBy>
@@ -52,6 +51,41 @@
 			</TableRowEntries>
 		</TableControl>
 	</View>
-	
+
+	<View> 
+		<Name>GetDicomTagResult</Name>
+		<ViewSelectedBy>
+			<TypeName>DicomTools.GetDicomTagResult</TypeName>
+		</ViewSelectedBy>
+
+		<GroupBy>
+			<PropertyName>Filename</PropertyName>
+			<Label>Filename</Label>
+		</GroupBy>
+
+		<TableControl>
+			<TableHeaders>
+				<TableColumnHeader>
+					<Label>DicomTag</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Value</Label>
+				</TableColumnHeader>
+			</TableHeaders>
+			<TableRowEntries>
+				<TableRowEntry>
+					<TableColumnItems>
+						<TableColumnItem>
+							<PropertyName>DicomTag</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Value</PropertyName>
+						</TableColumnItem>
+					</TableColumnItems>
+				</TableRowEntry>
+			</TableRowEntries>
+		</TableControl>
+	</View>
+
 </ViewDefinitions>
 </Configuration>
