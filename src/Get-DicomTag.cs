@@ -15,7 +15,6 @@
 namespace DicomTools
 {
 	using System;
-	using System.Collections;
    	using System.IO;
 	using System.Management.Automation;
 	using Microsoft.PowerShell.Commands;
@@ -119,18 +118,13 @@ namespace DicomTools
                         return;
                     }
 
-                    // process the file
+                    // process the file, write each tag out to the pipeline
                     try {
 	                    WriteVerbose($"Attempting to extract information from DICOM file: {filePath}...");
 	                    var file = DicomFile.Open(filePath);
-						
-						// save each tag to a hastable, write the hashtable to the pipline
-						Hashtable allTags = new Hashtable();
-	                    foreach (var tag in file.Dataset)
-                    	{
-							allTags.Add(tag,file.Dataset.GetValueOrDefault(tag.Tag,0,""));
+				        foreach (var tag in file.Dataset) {
+							WriteObject(new GetDicomTagResult(tag.ToString(), file.Dataset.GetValueOrDefault(tag.Tag,0,""), filePath));
                     	}
-						WriteObject(allTags);
 					}
                		catch (Exception e) {
 						WriteWarning("Error occurred during DICOM file dump operation. Use -Debug for exception details");
