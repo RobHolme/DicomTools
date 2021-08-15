@@ -1,3 +1,14 @@
+/* Filename:    SendCEcho.cs
+ * 
+ * Author:      Rob Holme (rob@holme.com.au) 
+ *              
+ * Date:        14/08/2021
+ * 
+ * Notes:       Implements a powershell CmdLet to send a DICOM C-ECHO to a remote host
+ * 
+ */
+ 	
+
 namespace DicomTools
 {
 	using System;
