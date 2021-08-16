@@ -123,34 +123,34 @@ namespace DicomTools
 			
 			try
             {
+				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
 				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
+				client.Options = new Dicom.Network.DicomServiceOptions();
+				client.Options.RequestTimeout = new TimeSpan(0,0,timeoutInSeconds);
 				var cEchoRequest = new DicomCEchoRequest();
+				
 
-				cEchoRequest.OnResponseReceived += (request, response) =>
-				{
+				// event handler - response received from C-ECHO request
+				cEchoRequest.OnResponseReceived += (request, response) => {
 					responseStatus = response.Status.ToString();
 				};
 
-				client.AssociationRejected += (sender, eventArgs) =>
-            	{
+				// event handler - client association rejected by server
+				client.AssociationRejected += (sender, eventArgs) => {
 					responseStatus = $"Association was rejected. Reason:{eventArgs.Reason}";
             	};
 
-            	client.AssociationAccepted += (sender, eventArgs) =>
-           		{
+				// event handler - client association accepted by server
+            	client.AssociationAccepted += (sender, eventArgs) => {
                 	verboseString += $"Association was accepted by:{eventArgs.Association.RemoteHost}";
             	};
 
 				// send an async request, wait for response (Powershell output can't be from a thread). 
-				// Record connection time. Cancel request after timeout period.
-				CancellationTokenSource sourceCancelToken = new CancellationTokenSource();
-     			CancellationToken cancelToken = sourceCancelToken.Token;
-				
+				// Record connection time. 				
 				Stopwatch timer = new Stopwatch() ; 
 				client.AddRequestAsync(cEchoRequest);
 				timer.Start();
-				sourceCancelToken.CancelAfter(timeoutInSeconds*1000);
-				var task = client.SendAsync(cancelToken);
+				var task = client.SendAsync();
 				task.Wait();
 				timer.Stop();
 				if (verboseString.Length > 0) {
