@@ -12,7 +12,7 @@
 RootModule = 'lib\DicomTools.dll'
 
 # Version number of this module.
-ModuleVersion = '0.2.0'
+ModuleVersion = '0.3.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Core')
@@ -72,7 +72,7 @@ FormatsToProcess = @('DicomTools.format.ps1xml')
 FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = @('Send-CEcho','Get-DicomTag')
+CmdletsToExport = @('Send-CEcho','Get-DicomTag','Send-CFind')
 
 # Variables to export from this module
 VariablesToExport = @()
