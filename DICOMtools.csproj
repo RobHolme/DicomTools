@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-	<Version>0.2.0</Version>
+	<Version>0.3.0</Version>
 	<Authors>Rob Holme</Authors>
 	<Product>DICOM Testing Module for Powershell Core</Product>
-    <FileVersion>0.2.0.0</FileVersion>
+    <FileVersion>0.3.0.0</FileVersion>
     <Description>Powershell Core module for DICOM testing</Description>
 	<RepositoryUrl>https://github.com/RobHolme/DICOMTools</RepositoryUrl>
     <PostBuildEvent>XCOPY /Y "$(TargetDir)DICOMtools.dll" "$(ProjectDir)..\..\..\module\lib\"</PostBuildEvent>
