@@ -12,6 +12,8 @@
 namespace DicomTools
 {
 	using System;
+	using System.Threading;
+	using System.Threading.Tasks;
     using System.Diagnostics;
 	using System.Management.Automation;
 	using Dicom.Network;
@@ -112,11 +114,12 @@ namespace DicomTools
         /// </summary>
         protected override void ProcessRecord()
         {
-			WriteVerbose("Hostname:        " + dicomRemoteHost);
-			WriteVerbose("Port:            " + dicomRemoteHostPort);
-			WriteVerbose("Calling AE Title:" + callingDicomAeTitle);
-			WriteVerbose("Called AE Title: " + calledDicomAeTitle);
-			WriteVerbose("Use TLS:         " + useTls);
+			WriteVerbose("Hostname:          " + dicomRemoteHost);
+			WriteVerbose("Port:              " + dicomRemoteHostPort);
+			WriteVerbose("Calling AE Title:  " + callingDicomAeTitle);
+			WriteVerbose("Called AE Title:   " + calledDicomAeTitle);
+			WriteVerbose("Use TLS:           " + useTls);
+			WriteVerbose("Timeout (seconds): " + timeoutInSeconds);
 			
 			try
             {
@@ -138,12 +141,17 @@ namespace DicomTools
                 	verboseString += $"Association was accepted by:{eventArgs.Association.RemoteHost}";
             	};
 
-				// send an async request, wait for response (Powershell output can't be from a thread). Record connection time.
+				// send an async request, wait for response (Powershell output can't be from a thread). 
+				// Record connection time. Cancel request after timeout period.
+				CancellationTokenSource sourceCancelToken = new CancellationTokenSource();
+     			CancellationToken cancelToken = sourceCancelToken.Token;
+				
 				Stopwatch timer = new Stopwatch() ; 
 				client.AddRequestAsync(cEchoRequest);
 				timer.Start();
-				var task = client.SendAsync();
-				task.Wait(timeoutInSeconds*1000);
+				sourceCancelToken.CancelAfter(timeoutInSeconds*1000);
+				var task = client.SendAsync(cancelToken);
+				task.Wait();
 				timer.Stop();
 				if (verboseString.Length > 0) {
 					WriteVerbose(verboseString);
