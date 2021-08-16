@@ -93,6 +93,19 @@ namespace DicomTools
             get { return this.useTls; }
             set { this.useTls = value; }
         }   
+
+		// The timeout waiting for a response from the DICOM service
+        [Parameter(
+            Mandatory = false,
+            Position = 6,
+            HelpMessage = "Timeout (in seconds) to wait for a response from the DICOM service"
+        )]
+		[ValidateRange(1,20)]
+        public int Timeout
+        {
+            get { return this.timeoutInSeconds; }
+            set { this.timeoutInSeconds = value; }
+        }
         
         /// <summary>
         /// get the HL7 item provided via the cmdlet parameter HL7ItemPosition
@@ -130,7 +143,7 @@ namespace DicomTools
 				client.AddRequestAsync(cEchoRequest);
 				timer.Start();
 				var task = client.SendAsync();
-				task.Wait();
+				task.Wait(timeoutInSeconds*1000);
 				timer.Stop();
 				if (verboseString.Length > 0) {
 					WriteVerbose(verboseString);
