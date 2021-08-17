@@ -87,5 +87,65 @@
 		</TableControl>
 	</View>
 
+	<View> 
+		<Name>SendCFindResult</Name>
+		<ViewSelectedBy>
+			<TypeName>DicomTools.SendCFindResult</TypeName>
+		</ViewSelectedBy>
+		<TableControl>
+			<TableHeaders>
+				<TableColumnHeader>
+					<Label>PatientName</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>PatientID</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>PatientBirthDate</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>PatientSex</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>PatientAddress</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>StudyDate</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>StudyInstanceID</Label>
+				</TableColumnHeader>
+			</TableHeaders>
+			<TableRowEntries>
+				<TableRowEntry>
+					<TableColumnItems>
+						<TableColumnItem>
+							<PropertyName>PatientName</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>PatientID</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>PatientBirthDate</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>PatientSex</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>PatientAddress</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>StudyDate</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>StudyInstanceID</PropertyName>
+						</TableColumnItem>
+					</TableColumnItems>
+				</TableRowEntry>
+			</TableRowEntries>
+		</TableControl>
+	</View>
+
+
 </ViewDefinitions>
 </Configuration>
