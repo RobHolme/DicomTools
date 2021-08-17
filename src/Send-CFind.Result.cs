@@ -82,7 +82,7 @@ namespace DicomTools {
         /// Populate the class members with resuls from the C-Echo
         /// </summary>
         /// <param name="ItemValue"></param>
-        public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string StudyDate, string StudyInstanceID)
+        public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string PatientAddress, string StudyDate, string StudyInstanceID)
         {
         	this.patientName = PatientName;
 			this.patientID = PatientID;
