@@ -12,7 +12,7 @@
 RootModule = 'lib\DicomTools.dll'
 
 # Version number of this module.
-ModuleVersion = '0.3.0'
+ModuleVersion = '1.0.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Core')
