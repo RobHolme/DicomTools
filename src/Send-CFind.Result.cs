@@ -10,6 +10,7 @@ namespace DicomTools {
 		private string patientID;
         private string patientBirthDate;
 		private string patientSex;
+		private string patientAddress;
 		private string studyDate;
 		private string studyInstanceID;
 
@@ -51,6 +52,15 @@ namespace DicomTools {
         }
 
 		/// <summary>
+        /// The patient's address
+        /// </summary>
+        public string PatientAddress
+        {
+            get { return patientAddress; }
+            set { this.patientAddress = value; }
+        }
+
+		/// <summary>
         /// The date the study was acquired
         /// </summary>
         public string StudyDate
@@ -78,6 +88,7 @@ namespace DicomTools {
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
 			this.patientSex = PatientSex;
+			this.patientAddress = PatientAddress;
 			this.studyDate = StudyDate;
 			this.studyInstanceID = StudyInstanceID;
         }
