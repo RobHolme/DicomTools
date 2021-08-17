@@ -23,10 +23,11 @@ namespace DicomTools
 		
 		 private string dicomRemoteHost;
 		 private int dicomRemoteHostPort;
-		 private string callingDicomAeTitle = "DICOMTOOLS";
+		 private string callingDicomAeTitle = "DICOMTOOLS-SCU";
 		 private string calledDicomAeTitle = "ANY-SCP";
 		 private string patientName = "";
 		 private string patientID = "";
+		 private string studyID = "";
 		 private bool useTls = false;
 		 private string responseStatus = "";
 		 private string verboseString = "";
@@ -110,6 +111,19 @@ namespace DicomTools
             set { this.patientID = value; }
         }  
 
+		// Study ID
+        [Parameter(
+            Mandatory = true,
+            Position = 4,
+            HelpMessage = "The Study ID to search for",
+			ParameterSetName = "StudyID"
+        )]
+        public string StudyID
+        {
+            get { return this.studyID; }
+            set { this.studyID = value; }
+        }
+
 		// Use TLS for the connection
         [Parameter(
             Mandatory = false,
@@ -150,7 +164,7 @@ namespace DicomTools
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientSex, "");
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientAddress, "");
                 cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
-                cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, "");
+                cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, studyID);
 
                 // The encoding of the results ('ISO_IR 100' is 'Latin Alphabet No. 1').  
 				// http://dicom.nema.org/dicom/2013/output/chtml/part02/sect_D.6.html
