@@ -22,7 +22,7 @@ namespace DicomTools
 		
 		 private string dicomRemoteHost;
 		 private int dicomRemoteHostPort;
-		 private string callingDicomAeTitle = "DICOMTOOLS";
+		 private string callingDicomAeTitle = "DICOMTOOLS-SCU";
 		 private string calledDicomAeTitle = "ANY-SCP";
 		 private bool useTls = false;
 		 private string responseStatus = "Failed";
