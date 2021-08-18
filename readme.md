@@ -61,11 +61,11 @@ Send a C-FIND query to a DICOM interface, display the results returned. Default 
 Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
 
 ```Powershell
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-PatientName] <string> [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-PatientName] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
 
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-PatientID] <string> [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-PatientID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
 
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-StudyID] <string> [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-StudyID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
 ```
 
 ### Parameters
@@ -82,6 +82,12 @@ __-PatientName <string>__ The name of the patient to search for. Can include '*'
 __-PatientID <string>__ The patient ID to search for. Can include '*' for wildcard searches.
 
 __-StudyID <string>__ The study instance ID to search for. Can include '*' for wildcard searches.
+
+__-Modality <string>__ Constrain the search to a modality type.
+
+__-StartDate <string>__ Constrain the search for studies acquired on or after this date.
+
+__-EndDate <string>__ Constrain the search for studies acquired on or before this date.
 
 __-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
 
