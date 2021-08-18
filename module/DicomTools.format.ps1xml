@@ -101,13 +101,13 @@
 					<Label>PatientID</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
-					<Label>PatientBirthDate</Label>
+					<Label>BirthDate</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
-					<Label>PatientSex</Label>
+					<Label>Sex</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
-					<Label>PatientAddress</Label>
+					<Label>Modality</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
 					<Label>StudyDate</Label>
@@ -126,13 +126,13 @@
 							<PropertyName>PatientID</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
-							<PropertyName>PatientBirthDate</PropertyName>
+							<PropertyName>BirthDate</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
-							<PropertyName>PatientSex</PropertyName>
+							<PropertyName>Sex</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
-							<PropertyName>PatientAddress</PropertyName>
+							<PropertyName>Modality</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
 							<PropertyName>StudyDate</PropertyName>

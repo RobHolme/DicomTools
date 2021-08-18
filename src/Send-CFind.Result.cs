@@ -10,7 +10,7 @@ namespace DicomTools {
 		private string patientID;
         private string patientBirthDate;
 		private string patientSex;
-		private string patientAddress;
+		private string modality;
 		private string studyDate;
 		private string studyInstanceID;
 
@@ -36,7 +36,7 @@ namespace DicomTools {
 		/// <summary>
         /// The patient's date of birth
         /// </summary>
-        public string PatientBirthDate
+        public string BirthDate
         {
             get { return this.patientBirthDate; }
             set { this.patientBirthDate = value; }
@@ -45,19 +45,19 @@ namespace DicomTools {
 		/// <summary>
         /// The patient's sex
         /// </summary>
-        public string PatientSex
+        public string Sex
         {
             get { return patientSex; }
             set { this.patientSex = value; }
         }
 
 		/// <summary>
-        /// The patient's address
+        /// The modality type
         /// </summary>
-        public string PatientAddress
+        public string Modality
         {
-            get { return patientAddress; }
-            set { this.patientAddress = value; }
+            get { return modality; }
+            set { this.modality = value; }
         }
 
 		/// <summary>
@@ -82,13 +82,13 @@ namespace DicomTools {
         /// Populate the class members with resuls from the C-Echo
         /// </summary>
         /// <param name="ItemValue"></param>
-        public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string PatientAddress, string StudyDate, string StudyInstanceID)
+        public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string Modality, string StudyDate, string StudyInstanceID)
         {
         	this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
 			this.patientSex = PatientSex;
-			this.patientAddress = PatientAddress;
+			this.modality = Modality;
 			this.studyDate = StudyDate;
 			this.studyInstanceID = StudyInstanceID;
         }

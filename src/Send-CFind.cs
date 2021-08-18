@@ -162,7 +162,7 @@ namespace DicomTools
                 cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientID, patientID);
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientBirthDate, "");
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientSex, "");
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientAddress, "");
+				cFindRequest.Dataset.AddOrUpdate(DicomTag.ModalitiesInStudy, "");
                 cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
                 cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, studyID);
 
@@ -180,10 +180,10 @@ namespace DicomTools
 						var responsePatientID = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientID, string.Empty);
 						var responsePatientDOB = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientBirthDate, string.Empty);
 						var responsePatientSex = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientSex, string.Empty);
-						var responsePatientAddress = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientAddress, string.Empty);
-                    	var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
+						var responseModality = response.Dataset.GetSingleValueOrDefault(DicomTag.ModalitiesInStudy, string.Empty);
+						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
                     	var responseStudyUID = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, string.Empty);
-						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responsePatientAddress, responseStudyDate, responseStudyUID));
+						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDate, responseStudyUID));
                 	}	
 				};
 
