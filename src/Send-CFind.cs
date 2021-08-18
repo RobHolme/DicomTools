@@ -14,6 +14,7 @@ namespace DicomTools
 	using System;
 	using System.Collections.Generic;
 	using System.Management.Automation;
+	using System.Text.RegularExpressions;
 	using Dicom;
 	using Dicom.Network;
 		
@@ -28,9 +29,13 @@ namespace DicomTools
 		 private string patientName = "";
 		 private string patientID = "";
 		 private string studyID = "";
+		 private string modalityType = "";
+		 private string studyDateStart = "";
+		 private string studyDateEnd = "";
 		 private bool useTls = false;
 		 private string responseStatus = "";
 		 private string verboseString = "";
+		 private bool abortProcessing = false;
 
 
         // Hostname or IP Address of DICOM service
@@ -124,10 +129,46 @@ namespace DicomTools
             set { this.studyID = value; }
         }
 
-		// Use TLS for the connection
+		// Constrain results to specific modalities
         [Parameter(
             Mandatory = false,
             Position = 5,
+            HelpMessage = "Constrain results to specific modalities"
+        )]
+        public string Modality
+        {
+            get { return this.modalityType; }
+            set { this.modalityType = value; }
+        } 
+
+		// Search for studies acquired on or after this date
+        [Parameter(
+            Mandatory = false,
+            Position = 5,
+            HelpMessage = "Include studies from or after this date YYYYMMDD"
+        )]
+        public string StartDate
+        {
+            get { return this.studyDateStart; }
+            set { this.studyDateStart = value; }
+        } 
+
+		// Search for studies acquired on or before this date
+        [Parameter(
+            Mandatory = false,
+            Position = 6,
+            HelpMessage = "Include studies from or after this date YYYYMMDD"
+        )]
+        public string EndDate
+        {
+            get { return this.studyDateEnd; }
+            set { this.studyDateEnd = value; }
+        } 
+
+		// Use TLS for the connection
+        [Parameter(
+            Mandatory = false,
+            Position = 7,
             HelpMessage = "Use TLS to secure the connection"
         )]
         public SwitchParameter UseTLS
@@ -135,13 +176,39 @@ namespace DicomTools
             get { return this.useTls; }
             set { this.useTls = value; }
         }   
+		
 
+		/// <summary>
+        /// begin processing
+        /// </summary>
+		protected override void BeginProcessing() {
+
+			// validate the dates are entered in the correct format
+			if (studyDateStart.Length > 0) {
+				if (!Regex.IsMatch(this.studyDateStart, "^(19)|(20)[0-9]{6}$")) {
+					WriteWarning("StartDate must be in the format YYYYMMDD");
+		  			abortProcessing = true;
+					return;
+				}
+			}
+			if (studyDateEnd.Length > 0) {
+				if (!Regex.IsMatch(this.studyDateEnd, "^(19)|(20)[0-9]{6}$")) {
+					WriteWarning("EndDate must be in the format YYYYMMDD");
+					abortProcessing = true;
+					return;
+				}
+			}
+		}
 	        
         /// <summary>
-        /// get the HL7 item provided via the cmdlet parameter HL7ItemPosition
+        /// Process all C-FIND requests
         /// </summary>
         protected override void ProcessRecord()
         {
+			if (abortProcessing) {
+				return;
+			}
+
 			// write connection details if -Verbose switch supplied
 			WriteVerbose("Hostname:          " + dicomRemoteHost);
 			WriteVerbose("Port:              " + dicomRemoteHostPort);
@@ -162,9 +229,14 @@ namespace DicomTools
                 cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientID, patientID);
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientBirthDate, "");
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientSex, "");
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.ModalitiesInStudy, "");
-                cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
+				cFindRequest.Dataset.AddOrUpdate(DicomTag.ModalitiesInStudy, modalityType);
                 cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, studyID);
+				if ((studyDateStart.Length > 0) | (studyDateEnd.Length > 0)) {
+                	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, $"{studyDateStart}-{studyDateEnd}");
+				}
+				else {
+                	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
+				}
 
                 // The encoding of the results ('ISO_IR 100' is 'Latin Alphabet No. 1').  
 				// http://dicom.nema.org/dicom/2013/output/chtml/part02/sect_D.6.html
