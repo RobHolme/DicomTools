@@ -61,11 +61,11 @@ Send a C-FIND query to a DICOM interface, display the results returned. Default 
 Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
 
 ```Powershell
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-PatientName] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-PatientName] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
 
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-PatientID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-PatientID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
 
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [-StudyID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-StudyID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
 ```
 
 ### Parameters
