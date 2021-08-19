@@ -149,7 +149,7 @@ namespace DicomTools
 				client.AddRequestAsync(cEchoRequest);
 				timer.Start();
 				var task = client.SendAsync();
-				task.Wait();
+				task.Wait(timeoutInSeconds*1000);
 				timer.Stop();
 				if (verboseString.Length > 0) {
 					WriteVerbose(verboseString);

@@ -36,6 +36,7 @@ namespace DicomTools
 		 private string responseStatus = "";
 		 private string verboseString = "";
 		 private bool abortProcessing = false;
+		 private int timeoutInSeconds = 20;
 
 
         // Hostname or IP Address of DICOM service
@@ -177,6 +178,17 @@ namespace DicomTools
             set { this.useTls = value; }
         }   
 		
+		// timeout waiting for a response from the server.
+        [Parameter(
+            Mandatory = false,
+            Position = 8,
+            HelpMessage = "The timeout in seconds to wait for a response"
+        )]
+        public int Timeout
+        {
+            get { return this.timeoutInSeconds; }
+            set { this.timeoutInSeconds = value; }
+        }  
 
 		/// <summary>
         /// begin processing
@@ -220,6 +232,8 @@ namespace DicomTools
             {
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
 				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
+				client.Options = new Dicom.Network.DicomServiceOptions();
+				client.Options.RequestTimeout = new TimeSpan(0,0,timeoutInSeconds);
 				client.NegotiateAsyncOps();
 				var cFindRequest = new DicomCFindRequest(DicomQueryRetrieveLevel.Study);
 
@@ -274,7 +288,7 @@ namespace DicomTools
 				
 				// send an async request, wait for response (Powershell output can't be from a thread). 
 				var task = client.SendAsync();
-				task.Wait();
+				task.Wait(timeoutInSeconds);
 				
 				// write verbose on association accepted, or warning if association was rejected. 
 				// can't write to pipeline directly from the event handlers as it must be from the main thread.
