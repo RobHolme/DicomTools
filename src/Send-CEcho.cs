@@ -12,6 +12,7 @@
 namespace DicomTools
 {
 	using System;
+	using System.Collections.Generic;
     using System.Diagnostics;
 	using System.Management.Automation;
 	using Dicom.Network;
@@ -131,7 +132,7 @@ namespace DicomTools
 
 				// event handler - response received from C-ECHO request
 				cEchoRequest.OnResponseReceived += (request, response) => {
-					verboseList.add("Response received");
+					verboseList.Add("Response received");
 					if (response != null) {
 						responseStatus = response.Status.ToString();
 					}
@@ -139,13 +140,13 @@ namespace DicomTools
 
 				// event handler - client association rejected by server
 				client.AssociationRejected += (sender, eventArgs) => {
-					verboseList.add("Association was rejected");
+					verboseList.Add("Association was rejected");
 					responseStatus = $"Association was rejected. Reason:{eventArgs.Reason}";
             	};
 
 				// event handler - client association accepted by server
             	client.AssociationAccepted += (sender, eventArgs) => {
-                	verboseList.add($"Association was accepted by:{eventArgs.Association.RemoteHost}");
+                	verboseList.Add($"Association was accepted by:{eventArgs.Association.RemoteHost}");
             	};
 
 				// send an async request, wait for response (Powershell output can't be from a thread). 
@@ -156,13 +157,17 @@ namespace DicomTools
 				var task = client.SendAsync();
 				task.Wait(timeoutInSeconds*1000);
 				timer.Stop();
-				foreach (string verboseString in verboseList.Reverse()) {
+
+				// write verbose logging from the async event handlers (cant write to pwsh host from anther thread)
+				verboseList.Reverse();
+				foreach (string verboseString in verboseList) {
 					WriteVerbose(verboseString);
 				}
 
 				// write the results to the pipeline
 				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, timer.ElapsedMilliseconds);
-            }
+				WriteObject(result);
+		    }
             catch (Exception e)
             {	
 				// typically network connection errors will trigger exceptions (remote host unreachable) 

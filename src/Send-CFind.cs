@@ -227,6 +227,8 @@ namespace DicomTools
 			WriteVerbose("Called AE Title:   " + calledDicomAeTitle);
 			WriteVerbose("Use TLS:           " + useTls);
 			
+			var verboseList = new List<string>();
+
 			try
             {
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
@@ -274,12 +276,12 @@ namespace DicomTools
 
 				// event handler - client association rejected by server
 				client.AssociationRejected += (sender, eventArgs) => {
-					responseStatus = $"Association was rejected. Reason:{eventArgs.Reason}";
+					verboseList.Add($"Association was rejected. Reason:{eventArgs.Reason}");
             	};
 
 				// event handler - client association accepted by server
             	client.AssociationAccepted += (sender, eventArgs) => {
-                	verboseString += $"Association was accepted by:{eventArgs.Association.RemoteHost}";
+                	verboseList.Add($"Association was accepted by:{eventArgs.Association.RemoteHost}");
             	};
 
 				// add the C-FIND request to the client
@@ -289,13 +291,10 @@ namespace DicomTools
 				var task = client.SendAsync();
 				task.Wait(timeoutInSeconds);
 				
-				// write verbose on association accepted, or warning if association was rejected. 
-				// can't write to pipeline directly from the event handlers as it must be from the main thread.
-				if (verboseString.Length > 0) {
+				// write verbose logging from the async event handlers (cant write to pwsh host from anther thread)
+				verboseList.Reverse();
+				foreach (string verboseString in verboseList) {
 					WriteVerbose(verboseString);
-				}
-				if (responseStatus.Length > 0) {
-					WriteWarning(responseStatus);
 				}
 
 				// write the C-FIND results to the pipeline
