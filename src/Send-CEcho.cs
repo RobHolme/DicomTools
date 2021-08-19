@@ -26,7 +26,6 @@ namespace DicomTools
 		 private string calledDicomAeTitle = "ANY-SCP";
 		 private bool useTls = false;
 		 private string responseStatus = "Failed";
-		 private string verboseString;
 		 private int timeoutInSeconds = 5;
 
 
@@ -119,6 +118,8 @@ namespace DicomTools
 			WriteVerbose("Use TLS:           " + useTls);
 			WriteVerbose("Timeout (seconds): " + timeoutInSeconds);
 			
+			var verboseList = new List<string>();
+
 			try
             {
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
@@ -130,17 +131,21 @@ namespace DicomTools
 
 				// event handler - response received from C-ECHO request
 				cEchoRequest.OnResponseReceived += (request, response) => {
-					responseStatus = response.Status.ToString();
+					verboseList.add("Response received");
+					if (response != null) {
+						responseStatus = response.Status.ToString();
+					}
 				};
 
 				// event handler - client association rejected by server
 				client.AssociationRejected += (sender, eventArgs) => {
+					verboseList.add("Association was rejected");
 					responseStatus = $"Association was rejected. Reason:{eventArgs.Reason}";
             	};
 
 				// event handler - client association accepted by server
             	client.AssociationAccepted += (sender, eventArgs) => {
-                	verboseString += $"Association was accepted by:{eventArgs.Association.RemoteHost}";
+                	verboseList.add($"Association was accepted by:{eventArgs.Association.RemoteHost}");
             	};
 
 				// send an async request, wait for response (Powershell output can't be from a thread). 
@@ -151,14 +156,12 @@ namespace DicomTools
 				var task = client.SendAsync();
 				task.Wait(timeoutInSeconds*1000);
 				timer.Stop();
-				if (verboseString.Length > 0) {
+				foreach (string verboseString in verboseList.Reverse()) {
 					WriteVerbose(verboseString);
 				}
 
 				// write the results to the pipeline
 				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, timer.ElapsedMilliseconds);
-				WriteObject(result);
-
             }
             catch (Exception e)
             {	

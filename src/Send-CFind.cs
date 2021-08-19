@@ -22,22 +22,21 @@ namespace DicomTools
     public class SendCFind : PSCmdlet
     {
 		
-		 private string dicomRemoteHost;
-		 private int dicomRemoteHostPort;
-		 private string callingDicomAeTitle = "DICOMTOOLS-SCU";
-		 private string calledDicomAeTitle = "ANY-SCP";
-		 private string patientName = "";
-		 private string patientID = "";
-		 private string studyID = "";
-		 private string modalityType = "";
-		 private string studyDateStart = "";
-		 private string studyDateEnd = "";
-		 private bool useTls = false;
-		 private string responseStatus = "";
-		 private string verboseString = "";
-		 private bool abortProcessing = false;
-		 private int timeoutInSeconds = 20;
-
+		private string dicomRemoteHost;
+		private int dicomRemoteHostPort;
+		private string callingDicomAeTitle = "DICOMTOOLS-SCU";
+		private string calledDicomAeTitle = "ANY-SCP";
+		private string patientName = "";
+		private string patientID = "";
+		private string studyID = "";
+		private string modalityType = "";
+		private string studyDateStart = "";
+		private string studyDateEnd = "";
+		private bool useTls = false;
+		private string responseStatus = "";
+		private string verboseString = "";
+		private bool abortProcessing = false;
+		private int timeoutInSeconds = 20;
 
         // Hostname or IP Address of DICOM service
         [Parameter(
