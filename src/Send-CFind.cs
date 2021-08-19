@@ -289,7 +289,7 @@ namespace DicomTools
 				
 				// send an async request, wait for response (Powershell output can't be from a thread). 
 				var task = client.SendAsync();
-				task.Wait(timeoutInSeconds);
+				task.Wait(timeoutInSeconds*1000);
 				
 				// write verbose logging from the async event handlers (cant write to pwsh host from anther thread)
 				verboseList.Reverse();
