@@ -41,7 +41,7 @@ __-LocalAETitle <string>__  The caller AE title. Defaults to 'DICOMTOOLS-SCU' if
 
 __-RemoteAETitle <string>__ The called AE title. Defaults to 'ANY-SCP' if no parameter supplied.
 
-__-Timeout <int>__ The timout in seconds before the DICOM association is cancelled.
+__-Timeout <int>__ The timout in seconds before the DICOM association is cancelled (or time to wait for a response to the C-ECHO if the association was successful).
 
 __-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
 
@@ -61,11 +61,11 @@ Send a C-FIND query to a DICOM interface, display the results returned. Default 
 Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
 
 ```Powershell
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-PatientName] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-PatientName] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
 
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-PatientID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-PatientID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
 
-Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-StudyID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [<CommonParameters>]
+Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-StudyID] <string> [[-Modality] <string>] [[-StartDate] <string>] [[-EndDate] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
 ```
 
 ### Parameters
@@ -90,6 +90,8 @@ __-StartDate <string>__ Constrain the search for studies acquired on or after th
 __-EndDate <string>__ Constrain the search for studies acquired on or before this date.
 
 __-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
+
+__-Timeout <int>__ The timout in seconds before the DICOM association is cancelled (or time to wait for a response to the C-FIND if association was successful).
 
 ### Examples
 Find all patients where Patient Name is 'Test'
