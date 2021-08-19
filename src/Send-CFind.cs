@@ -298,7 +298,12 @@ namespace DicomTools
 				}
 
 				// write the C-FIND results to the pipeline
-				WriteObject(cFindResultList);
+				if (cFindResultList.Count == 0) {
+					WriteWarning($"Either no results returned, or query timed out (timeout set to {timeoutInSeconds} seconds.");
+				}
+				else {
+					WriteObject(cFindResultList);
+				}
             }
             catch (Exception e)
             {	
