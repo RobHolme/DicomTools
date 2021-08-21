@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
+	<EnableDefaultItems>true</EnableDefaultItems>
 	<Version>1.2.2</Version>
 	<Authors>Rob Holme</Authors>
 	<Product>DICOM Testing Module for Powershell Core</Product>
@@ -11,13 +12,7 @@
 	<RepositoryUrl>https://github.com/RobHolme/DicomTools</RepositoryUrl>
     <PostBuildEvent>XCOPY /Y "$(TargetDir)DICOMtools.dll" "$(ProjectDir)..\..\..\module\lib\"</PostBuildEvent>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include=".\src\**\*.cs"> 
-      <Link>notimportant</Link>
-    </Compile>
-  </ItemGroup>
-
+  
   <ItemGroup>
   	<PackageReference Include="fo-dicom.NetCore" Version="4.0.7" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
