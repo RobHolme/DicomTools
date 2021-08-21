@@ -13,7 +13,7 @@ namespace DicomTools
 {
 	using System;
 	using System.Collections.Generic;
-    using System.Diagnostics;
+	using System.Diagnostics;
 	using System.Management.Automation;
 	using Dicom.Network;
 		
@@ -122,7 +122,7 @@ namespace DicomTools
 			var verboseList = new List<string>();
 
 			try
-            {
+			{
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
 				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
 				client.Options = new Dicom.Network.DicomServiceOptions();
@@ -176,6 +176,6 @@ namespace DicomTools
                 //In real life, do something about this exception
                 WriteDebug($"Exception: -> {e}");
             }
-        }   
+		}   
 	}
 }
