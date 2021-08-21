@@ -12,6 +12,7 @@
 namespace DicomTools {
 	using System;
 	using System.Collections.Generic;
+	using System.Threading;
 	using System.Diagnostics;
 	using System.Management.Automation;
 	using Dicom.Network;
@@ -93,7 +94,7 @@ namespace DicomTools {
 			Position = 6,
 			HelpMessage = "Timeout (in seconds) to wait for a response from the DICOM service"
 		)]
-		[ValidateRange(1, 20)]
+		[ValidateRange(1, 60)]
 		public int Timeout {
 			get { return this.timeoutInSeconds; }
 			set { this.timeoutInSeconds = value; }
@@ -113,6 +114,10 @@ namespace DicomTools {
 			var verboseList = new List<string>();
 
 			try {
+				// cancel token to cancel the request after a timeout
+				CancellationTokenSource sourceCancelToken = new CancellationTokenSource();
+				CancellationToken cancelToken = sourceCancelToken.Token;
+
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
 				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
 				client.Options = new Dicom.Network.DicomServiceOptions();
@@ -140,12 +145,14 @@ namespace DicomTools {
 				};
 
 				// send an async request, wait for response (Powershell output can't be from a thread). 
+				// cancel request after -Timeout period
 				// Record connection time. 				
 				Stopwatch timer = new Stopwatch();
 				client.AddRequestAsync(cEchoRequest);
 				timer.Start();
-				var task = client.SendAsync();
-				task.Wait(timeoutInSeconds * 1000);
+				sourceCancelToken.CancelAfter(timeoutInSeconds * 1000);
+				var task = client.SendAsync(cancelToken);
+				task.Wait();
 				timer.Stop();
 
 				// write verbose logging from the async event handlers (cant write to pwsh host from anther thread)
@@ -154,9 +161,15 @@ namespace DicomTools {
 					WriteVerbose(verboseString);
 				}
 
-				// write the results to the pipeline
-				var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, timer.ElapsedMilliseconds);
-				WriteObject(result);
+				// check to see if the task timed out, otherwise return results.
+				if (cancelToken.IsCancellationRequested) {
+					WriteWarning($"The C-ECHO query timed out (timeout set to {timeoutInSeconds} seconds). Use -Timeout to increase duration.");
+				}
+				else {
+					// write the results to the pipeline
+					var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, timer.ElapsedMilliseconds);
+					WriteObject(result);
+				}
 			}
 			catch (Exception e) {
 				// typically network connection errors will trigger exceptions (remote host unreachable) 
