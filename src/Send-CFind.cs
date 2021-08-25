@@ -287,7 +287,7 @@ namespace DicomTools {
 						}
 						responseModality = responseModality.Substring(1);
 						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
-						DateTime responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split(".")[0]}");
+						DateTime responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
 						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDateTime, responseStudyUID));
 					}
 				};
