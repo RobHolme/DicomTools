@@ -29,8 +29,10 @@ namespace DicomTools {
 		private string patientID = "";
 		private string studyID = "";
 		private string modalityType = "";
-		private string studyDateStart = "";
-		private string studyDateEnd = "";
+		private string studyRangeStart = "";
+		private string studyRangeEnd = "";
+		private DateTime studyDateTimeStart;
+		private DateTime studyDateTimeEnd;
 		private bool useTls = false;
 		private bool abortProcessing = false;
 		private int timeoutInSeconds = 20;
@@ -136,9 +138,9 @@ namespace DicomTools {
 			Position = 7,
 			HelpMessage = "Include studies from or after this date YYYYMMDD"
 		)]
-		public string StartDate {
-			get { return this.studyDateStart; }
-			set { this.studyDateStart = value; }
+		public string StartDateTime {
+			get { return this.studyRangeStart; }
+			set { this.studyRangeStart = value; }
 		}
 
 		// Search for studies acquired on or before this date
@@ -147,9 +149,9 @@ namespace DicomTools {
 			Position = 8,
 			HelpMessage = "Include studies from or after this date YYYYMMDD"
 		)]
-		public string EndDate {
-			get { return this.studyDateEnd; }
-			set { this.studyDateEnd = value; }
+		public string EndDateTime {
+			get { return this.studyRangeEnd; }
+			set { this.studyRangeEnd = value; }
 		}
 
 		// Use TLS for the connection
@@ -180,22 +182,32 @@ namespace DicomTools {
 		/// </summary>
 		protected override void BeginProcessing() {
 
-			// validate the dates are entered in the correct format
-			if (studyDateStart.Length > 0) {
-				if (!Regex.IsMatch(this.studyDateStart, "^(19)|(20)[0-9]{6}$")) {
-					WriteWarning("StartDate must be in the format YYYYMMDD");
+			// Convert the user date time values into a DateTime object. Use standard parser, warn if unable to parse. 
+			// Conversion is done here, instead of using a [DateTime] parameter to allow friendlier error reporting if value can;t be parsed as a DateTime value.
+			if (studyRangeStart.Length > 0) {
+				try {
+					studyDateTimeStart.Parse(studyRangeStart);
+					studyRangeStart = $"{studyDateTimeStart.Year}{studyDateTimeStart.Month.ToString().PadLeft(2, '0')}{studyDateTimeStart.Day.ToString().PadLeft(2, '0')}{studyDateTimeStart.Month.ToString().PadLeft(2, '0')}{studyDateTimeStart.Hour.ToString().PadLeft(2, '0')}{studyDateTimeStart.Minute.ToString().PadLeft(2, '0')}{studyDateTimeStart.Second.ToString().PadLeft(2, '0')}.000000";
+				}
+				catch {
+					WriteWarning($"Unable to convert {studyRangeStart} into a DateTime value for -StartDateTime.");
 					abortProcessing = true;
 					return;
 				}
 			}
-			if (studyDateEnd.Length > 0) {
-				if (!Regex.IsMatch(this.studyDateEnd, "^(19)|(20)[0-9]{6}$")) {
-					WriteWarning("EndDate must be in the format YYYYMMDD");
+			if (studyRangeEnd.Length > 0) {
+				try {
+					studyDateTimeEnd.Parse(studyRangeEnd);
+					studyRangeEnd = $"{studyDateTimeEnd.Year}{studyDateTimeEnd.Month.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Day.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Month.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Hour.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Minute.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Second.ToString().PadLeft(2, '0')}.000000";
+				}
+				catch {
+					WriteWarning($"Unable to convert {studyRangeEnd} into a DateTime value for -EndDateTime.");
 					abortProcessing = true;
 					return;
 				}
 			}
 		}
+
 
 		/// <summary>
 		/// Process all C-FIND requests
@@ -263,7 +275,7 @@ namespace DicomTools {
 						foreach (string modality in responseModalitiesInStudy) {
 							responseModality += $",{modality}";
 						}
-						responseModality = responseModality.Substring(1);						
+						responseModality = responseModality.Substring(1);
 						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDate, responseStudyUID));
 					}
 				};
@@ -314,5 +326,17 @@ namespace DicomTools {
 				WriteDebug($"Exception: -> {e}");
 			}
 		}
+
+		private DateTime ConvertDtToDateTime(string DicomDtString) {
+		//	if DicomDtString matches "20170207072219.080+0800"
+			return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fffzzz", null);
+		}
+
+		//	if DicomDtString matches "20170207072219.080"
+		// return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fff", null);
+
+		//	if DicomDtString matches "20170207072219"
+		// return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss", null);
+		
 	}
 }
