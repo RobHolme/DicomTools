@@ -107,7 +107,7 @@
 					<Label>Sex</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
-					<Label>Modality</Label>
+					<Label>ModalitiesInStudy</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
 					<Label>StudyDate</Label>
@@ -132,7 +132,7 @@
 							<PropertyName>Sex</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
-							<PropertyName>Modality</PropertyName>
+							<PropertyName>ModalitiesInStudy</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
 							<PropertyName>StudyDate</PropertyName>
