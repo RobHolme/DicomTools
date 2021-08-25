@@ -3,6 +3,7 @@
 /// </summary>
 
 namespace DicomTools {
+	using System;
 
 	public class SendCFindResult {
 		private string patientName;
@@ -10,7 +11,7 @@ namespace DicomTools {
 		private string patientBirthDate;
 		private string patientSex;
 		private string modalitiesInStudy;
-		private string studyDate;
+		private DateTime studyDate;
 		private string studyInstanceID;
 
 
@@ -57,7 +58,7 @@ namespace DicomTools {
 		/// <summary>
 		/// The date the study was acquired
 		/// </summary>
-		public string StudyDate {
+		public DateTime StudyDate {
 			get { return studyDate; }
 			set { this.studyDate = value; }
 		}
@@ -74,7 +75,7 @@ namespace DicomTools {
 		/// Populate the class members with resuls from the C-Echo
 		/// </summary>
 		/// <param name="ItemValue"></param>
-		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, string StudyDate, string StudyInstanceID) {
+		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, DateTime StudyDate, string StudyInstanceID) {
 			this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
