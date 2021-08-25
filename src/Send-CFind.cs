@@ -286,7 +286,9 @@ namespace DicomTools {
 							responseModality += $",{modality}";
 						}
 						responseModality = responseModality.Substring(1);
-						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime}"), responseStudyUID));
+						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
+						DateTime responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split(".")[0]}");
+						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDateTime, responseStudyUID));
 					}
 				};
 
@@ -344,14 +346,24 @@ namespace DicomTools {
 		private DateTime ConvertDtToDateTime(string DicomDtString) {
 			try {
 
-				// Year Month Day Hour Minute Second SplitSecond Timezone
+				// Year Month Day Hour Minute Second SplitSecond (6 digits) Timezone
 				if (Regex.IsMatch(DicomDtString, @"^[0-9]{14}\.[0-9]{6}\+[0-9]{4}$")) {
 					return DateTime.ParseExact(DicomDtString, "yyyyMMddHHmmss.ffffffzzz", null);
 				}
 
-				// Year Month Day Hour Minute Second SplitSecond 
+				// Year Month Day Hour Minute Second SplitSecond (3 digits) Timezone
+				if (Regex.IsMatch(DicomDtString, @"^[0-9]{14}\.[0-9]{3}\+[0-9]{4}$")) {
+					return DateTime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fffzzz", null);
+				}
+
+				// Year Month Day Hour Minute Second SplitSecond (6 digits)
 				if (Regex.IsMatch(DicomDtString, @"^[0-9]{14}\.[0-9]{6}")) {
 					return DateTime.ParseExact(DicomDtString, "yyyyMMddHHmmss.ffffff", null);
+				}
+
+				// Year Month Day Hour Minute Second SplitSecond (3 digits)
+				if (Regex.IsMatch(DicomDtString, @"^[0-9]{14}\.[0-9]{3}")) {
+					return DateTime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fff", null);
 				}
 
 				// Year Month Day Hour Minute Second 
