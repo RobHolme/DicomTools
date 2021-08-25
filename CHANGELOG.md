@@ -8,3 +8,4 @@
 * 1.2.1 - Added timeout for C-ECHO and C-FIND to receive a response (same timeout also applied waiting for an association to complete)
 * 1.2.2 - Minor changes to verbose logging. Improved result reporting on timeout. 
 * 1.2.3 - User warned if a timeout was reached.
+* 1.2.4 - Added support for reporting all Modalities in a study.  
