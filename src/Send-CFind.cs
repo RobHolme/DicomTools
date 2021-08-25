@@ -328,15 +328,34 @@ namespace DicomTools {
 		}
 
 		private DateTime ConvertDtToDateTime(string DicomDtString) {
-		//	if DicomDtString matches "20170207072219.080+0800"
-			return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fffzzz", null);
+
+			// Year Month Day Hour Minute Second SplitSecond Timezone
+			if (!Regex.IsMatch(this.DicomDtString, "^[0-9]{14}\\.[0-9]{3}\\+[0-9]{4}$")) {
+				return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fffzzz", null);
+			}
+
+			// Year Month Day Hour Minute Second SplitSecond 
+			if (!Regex.IsMatch(this.DicomDtString, "^[0-9]{14}\\.[0-9]{3}")) {
+				return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fff", null);
+			}
+
+			// Year Month Day Hour Minute Second 
+			if (!Regex.IsMatch(this.DicomDtString, "^[0-9]{14}")) {
+				return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss", null);
+			}
+
+			// Year Month Day Hour Minute 
+			if (!Regex.IsMatch(this.DicomDtString, "^[0-9]{12}")) {
+				return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmm", null);
+			}
+
+			// Year Month Day 
+			if (!Regex.IsMatch(this.DicomDtString, "^[0-9]{8}")) {
+				return Datetime.ParseExact(DicomDtString, "yyyyMMdd", null);
+			}
+			
+			// not match found
+			return null;
 		}
-
-		//	if DicomDtString matches "20170207072219.080"
-		// return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss.fff", null);
-
-		//	if DicomDtString matches "20170207072219"
-		// return Datetime.ParseExact(DicomDtString, "yyyyMMddHHmmss", null);
-		
 	}
 }
