@@ -9,3 +9,4 @@
 * 1.2.2 - Minor changes to verbose logging. Improved result reporting on timeout. 
 * 1.2.3 - User warned if a timeout was reached.
 * 1.2.4 - Added support for reporting all Modalities in a study.  
+* 1.2.5 - Added -AccessionNumber parameter to search on Accession Number.
