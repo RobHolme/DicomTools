@@ -28,6 +28,7 @@ namespace DicomTools {
 		private string patientName = "";
 		private string patientID = "";
 		private string studyID = "";
+		private string accessionNumber = "";
 		private string modalityType = "";
 		private string studyDateStartString = "";
 		private string studyDateEndString = "";
@@ -121,6 +122,18 @@ namespace DicomTools {
 		public string StudyID {
 			get { return this.studyID; }
 			set { this.studyID = value; }
+		}
+
+		// Accession Number
+		[Parameter(
+			Mandatory = true,
+			Position = 5,
+			HelpMessage = "The Accession Number to search for",
+			ParameterSetName = "AccessionNumber"
+		)]
+		public string AccessionNumber {
+			get { return this.accessionNumber; }
+			set { this.accessionNumber = value; }
 		}
 
 		// Constrain results to specific modalities
@@ -254,6 +267,8 @@ namespace DicomTools {
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientSex, "");
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.ModalitiesInStudy, modalityType);
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, studyID);
+				cFindRequest.Dataset.AddOrUpdate(DicomTag.AccessionNumber, accessionNumber);
+				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDescription, "");
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
 				if ((studyDateStartString.Length > 0) | (studyDateEndString.Length > 0)) {
 					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, $"{studyRangeStartDate}-{studyRangeEndDate}");
@@ -286,13 +301,15 @@ namespace DicomTools {
 						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
 						var responseStudyTime = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyTime, string.Empty);
 						var responseStudyUID = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, string.Empty);
+						var responseAccessionNumber = response.Dataset.GetSingleValueOrDefault(DicomTag.AccessionNumber, string.Empty);
+						var responseStudyDescription = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDescription, string.Empty);
 						foreach (string modality in responseModalitiesInStudy) {
 							responseModality += $",{modality}";
 						}
 						responseModality = responseModality.Substring(1);
 						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
-						DateTime responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
-						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDateTime, responseStudyUID));
+						DateTime? responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
+						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDateTime, responseStudyUID, responseAccessionNumber, responseStudyDescription));
 					}
 				};
 
@@ -347,7 +364,7 @@ namespace DicomTools {
 		/// Convert a DICOM DT string to a DateTime Object.
 		//	If unable to detect format, return DateTime.MinValue
 		/// </summary>
-		private DateTime ConvertDtToDateTime(string DicomDtString) {
+		private DateTime? ConvertDtToDateTime(string DicomDtString) {
 			try {
 
 				// Year Month Day Hour Minute Second SplitSecond (6 digits) Timezone
@@ -386,10 +403,10 @@ namespace DicomTools {
 				}
 
 				// not match found
-				return DateTime.MinValue;
+				return null;
 			}
 			catch {
-				return DateTime.MinValue;
+				return null;
 			}
 		}
 	}

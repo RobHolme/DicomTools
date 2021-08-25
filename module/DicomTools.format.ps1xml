@@ -113,6 +113,9 @@
 					<Label>StudyDate</Label>
 				</TableColumnHeader>
 				<TableColumnHeader>
+					<Label>AccessionNumber</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
 					<Label>StudyInstanceID</Label>
 				</TableColumnHeader>
 			</TableHeaders>
@@ -136,6 +139,9 @@
 						</TableColumnItem>
 						<TableColumnItem>
 							<PropertyName>StudyDate</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>AccessionNumber</PropertyName>
 						</TableColumnItem>
 						<TableColumnItem>
 							<PropertyName>StudyInstanceID</PropertyName>

@@ -11,8 +11,10 @@ namespace DicomTools {
 		private string patientBirthDate;
 		private string patientSex;
 		private string modalitiesInStudy;
-		private DateTime studyDate;
+		private DateTime? studyDate;
 		private string studyInstanceID;
+		private string accessionNumber;
+		private string studyDescription;
 
 
 		/// <summary>
@@ -58,7 +60,7 @@ namespace DicomTools {
 		/// <summary>
 		/// The date the study was acquired
 		/// </summary>
-		public DateTime StudyDate {
+		public DateTime? StudyDate {
 			get { return studyDate; }
 			set { this.studyDate = value; }
 		}
@@ -72,10 +74,26 @@ namespace DicomTools {
 		}
 
 		/// <summary>
+		/// The study AccessionNumber
+		/// </summary>
+		public string AccessionNumber {
+			get { return accessionNumber; }
+			set { this.accessionNumber = value; }
+		}
+
+		/// <summary>
+		/// The study Description
+		/// </summary>
+		public string StudyDescription {
+			get { return studyDescription; }
+			set { this.studyDescription = value; }
+		}
+
+		/// <summary>
 		/// Populate the class members with resuls from the C-Echo
 		/// </summary>
 		/// <param name="ItemValue"></param>
-		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, DateTime StudyDate, string StudyInstanceID) {
+		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, DateTime? StudyDate, string StudyInstanceID, string AccessionNumber, string StudyDescription) {
 			this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
@@ -83,6 +101,8 @@ namespace DicomTools {
 			this.modalitiesInStudy = ModalitiesInStudy;
 			this.studyDate = StudyDate;
 			this.studyInstanceID = StudyInstanceID;
+			this.accessionNumber = AccessionNumber;
+			this.studyDescription = StudyDescription;
 		}
 	}
 }
