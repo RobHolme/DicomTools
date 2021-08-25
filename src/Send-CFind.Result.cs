@@ -9,7 +9,7 @@ namespace DicomTools {
 		private string patientID;
 		private string patientBirthDate;
 		private string patientSex;
-		private string modality;
+		private string modalitiesInStudy;
 		private string studyDate;
 		private string studyInstanceID;
 
@@ -49,9 +49,9 @@ namespace DicomTools {
 		/// <summary>
 		/// The modality type
 		/// </summary>
-		public string Modality {
-			get { return modality; }
-			set { this.modality = value; }
+		public string ModalitiesInStudy {
+			get { return modalitiesInStudy; }
+			set { this.modalitiesInStudy = value; }
 		}
 
 		/// <summary>
@@ -74,12 +74,12 @@ namespace DicomTools {
 		/// Populate the class members with resuls from the C-Echo
 		/// </summary>
 		/// <param name="ItemValue"></param>
-		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string Modality, string StudyDate, string StudyInstanceID) {
+		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, string StudyDate, string StudyInstanceID) {
 			this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
 			this.patientSex = PatientSex;
-			this.modality = Modality;
+			this.modalitiesInStudy = ModalitiesInStudy;
 			this.studyDate = StudyDate;
 			this.studyInstanceID = StudyInstanceID;
 		}

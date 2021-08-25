@@ -252,13 +252,18 @@ namespace DicomTools {
 				// event handler - response received from C-Find request
 				cFindRequest.OnResponseReceived += (request, response) => {
 					if (response.Status == DicomStatus.Pending) {
+						var responseModality = "";
 						var responsePatientName = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientName, string.Empty);
 						var responsePatientID = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientID, string.Empty);
 						var responsePatientDOB = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientBirthDate, string.Empty);
 						var responsePatientSex = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientSex, string.Empty);
-						var responseModality = response.Dataset.GetSingleValueOrDefault(DicomTag.ModalitiesInStudy, string.Empty);
+						string[] responseModalitiesInStudy = response.Dataset.GetValues<string>(DicomTag.ModalitiesInStudy);
 						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
 						var responseStudyUID = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, string.Empty);
+						foreach (string modality in responseModalitiesInStudy) {
+							responseModality += $",{modality}";
+						}
+						responseModality = responseModality.Substring(1);						
 						cFindResultList.Add(new SendCFindResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStudyDate, responseStudyUID));
 					}
 				};
