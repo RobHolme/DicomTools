@@ -50,7 +50,7 @@ namespace DicomTools {
 		/// <summary>
 		/// The modality type
 		/// </summary>
-		public string ModalitiesInStudy {
+		public string Modality {
 			get { return modalitiesInStudy; }
 			set { this.modalitiesInStudy = value; }
 		}

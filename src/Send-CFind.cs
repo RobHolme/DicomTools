@@ -140,7 +140,7 @@ namespace DicomTools {
 			Position = 7,
 			HelpMessage = "Include studies from or after this date YYYYMMDD"
 		)]
-		public string StartDateTime {
+		public string StartDate {
 			get { return this.studyDateStartString; }
 			set { this.studyDateStartString = value; }
 		}
@@ -151,7 +151,7 @@ namespace DicomTools {
 			Position = 8,
 			HelpMessage = "Include studies from or after this date YYYYMMDD"
 		)]
-		public string EndDateTime {
+		public string EndDate {
 			get { return this.studyDateEndString; }
 			set { this.studyDateEndString = value; }
 		}
@@ -190,7 +190,7 @@ namespace DicomTools {
 			if (studyDateStartString.Length > 0) {
 				try {
 					DateTime studyDateTimeStart = DateTime.Parse(studyDateStartString);
-					studyRangeStartDate = $"{studyDateTimeStart.Year}{studyDateTimeStart.Month.ToString().PadLeft(2, '0')}{studyDateTimeStart.Day.ToString().PadLeft(2, '0')}{studyDateTimeStart.Month.ToString().PadLeft(2, '0')}";
+					studyRangeStartDate = $"{studyDateTimeStart.Year}{studyDateTimeStart.Month.ToString().PadLeft(2, '0')}{studyDateTimeStart.Day.ToString().PadLeft(2, '0')}";
 					studyRangeStartTime = $"{studyDateTimeStart.Hour.ToString().PadLeft(2, '0')}{studyDateTimeStart.Minute.ToString().PadLeft(2, '0')}{studyDateTimeStart.Second.ToString().PadLeft(2, '0')}";
 				}
 				catch {
@@ -202,7 +202,7 @@ namespace DicomTools {
 			if (studyDateEndString.Length > 0) {
 				try {
 					DateTime studyDateTimeEnd = DateTime.Parse(studyDateEndString);
-					studyRangeEndDate = $"{studyDateTimeEnd.Year}{studyDateTimeEnd.Month.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Day.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Month.ToString().PadLeft(2, '0')}";
+					studyRangeEndDate = $"{studyDateTimeEnd.Year}{studyDateTimeEnd.Month.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Day.ToString().PadLeft(2, '0')}";
 					studyRangeEndTime = $"{studyDateTimeEnd.Hour.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Minute.ToString().PadLeft(2, '0')}{studyDateTimeEnd.Second.ToString().PadLeft(2, '0')}";
 				}
 				catch {
@@ -229,8 +229,8 @@ namespace DicomTools {
 			WriteVerbose($"Called AE Title:       {calledDicomAeTitle}");
 			WriteVerbose($"Use TLS:               {useTls}");
 			WriteVerbose($"Timeout:               {timeoutInSeconds}");
-			WriteVerbose($"Study Start Date/Time: {studyRangeStartDate} {studyRangeStartTime}");
-			WriteVerbose($"Study End Date/Time:   {studyRangeEndDate} {studyRangeEndTime}");
+			WriteVerbose($"Study Start Date: {studyRangeStartDate}");
+			WriteVerbose($"Study End Date:   {studyRangeEndDate}");
 
 			var verboseList = new List<string>();
 
@@ -254,13 +254,17 @@ namespace DicomTools {
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientSex, "");
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.ModalitiesInStudy, modalityType);
 				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, studyID);
+				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
 				if ((studyDateStartString.Length > 0) | (studyDateEndString.Length > 0)) {
 					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, $"{studyRangeStartDate}-{studyRangeEndDate}");
-					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, $"{studyRangeStartTime}-{studyRangeEndTime}");
+				// Not all PACS implement the time range consistently. 
+				// Some apply the time in addition to date range, i.e. only between the time range on each day, rather than start datetime and end datetime. 	
+				// removing to avoid different experiences between PACS.
+				//	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, $"{studyRangeStartTime}-{studyRangeEndTime}");
 				}
 				else {
 					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
-					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
+				//	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
 				}
 
 				// The encoding of the results ('ISO_IR 100' is 'Latin Alphabet No. 1').  
