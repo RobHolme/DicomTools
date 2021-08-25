@@ -7,12 +7,12 @@ This PowerShell module is a small collection of CmdLets to test DICOM interfaces
 
 For Powershell Core v7+ only, this module does not support Windows PowerShell.
 
-This module is a wrapper for the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-dicom/fo-dicom
+This module uses the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-dicom/fo-dicom
 
 # Installation 
 Either build the solution (instructions below), or download the latest release from https://github.com/RobHolme/DicomTools/releases. 
 
-Copy the contents of the /module folder (or the files from the release zip file) to a folder named 'DicomTools' in the Powershell module path (use $env:PSModulePath to list all paths). 
+Copy the contents of the /module folder (or extract the files from the release) to a folder named 'DicomTools' in the Powershell module path (use $env:PSModulePath to list all paths). 
 
 Requires PowerShell 7.0 or greater, Windows Powershell is not supported.
 ## Build instructions
