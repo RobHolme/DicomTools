@@ -1,0 +1,1080 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<helpItems schema="maml" xmlns="http://msh">
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2021 v2.3.50-->
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<!--TAG: HASCOMMONPARAMETERS-->
+		<!--Command-->
+		<command:details>
+			<command:name>Send-CEcho</command:name>
+			<maml:description>
+				<maml:para>Sends a DICOM C-Echo to a DICOM endpoint.</maml:para>
+			</maml:description>
+			<maml:copyright>
+				<maml:para />
+			</maml:copyright>
+			<command:verb>Send</command:verb>
+			<command:noun>CEcho</command:noun>
+			<dev:version />
+		</command:details>
+		<maml:description>
+			<maml:para>Sends a DICOM C-Echo to a DICOM endpoint. Reteurn the response, and time taken to respond (If successfull).</maml:para>
+		</maml:description>
+		<command:syntax>
+			<!--Parameter Sets-->
+			<command:syntaxItem>
+				<maml:name>Send-CEcho</maml:name>
+				<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress">
+					<maml:name>Hostname</maml:name>
+					<maml:description />
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+					<dev:type>
+						<maml:name>string</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Port</maml:name>
+					<maml:description>
+						<maml:para>The port number of the remote DICOM interface.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type>
+						<maml:name>Int</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>LocalAETitle</maml:name>
+					<maml:description>
+						<maml:para>The local (calling) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue>DICOMTOOLS-SCU</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>RemoteAETitle</maml:name>
+					<maml:description>
+						<maml:para>The remote (called) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue>ANY-SCP</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>UseTLS</maml:name>
+					<maml:description>
+						<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name>switch</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue>$false</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Timeout</maml:name>
+					<maml:description>
+						<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-20</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type>
+						<maml:name>Int</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue>5</dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<!-- All Parameters-->
+			<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress">
+				<maml:name>Hostname</maml:name>
+				<maml:description />
+				<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>Port</maml:name>
+				<maml:description>
+					<maml:para>The port number of the remote DICOM interface.</maml:para>
+				</maml:description>
+				<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+				<command:parameterValueGroup>
+					<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+				</command:parameterValueGroup>
+				<dev:type>
+					<maml:name>Int</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>LocalAETitle</maml:name>
+				<maml:description>
+					<maml:para>The local (calling) AE Title</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue>DICOMTOOLS-SCU</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>RemoteAETitle</maml:name>
+				<maml:description>
+					<maml:para>The remote (called) AE Title</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue>ANY-SCP</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>UseTLS</maml:name>
+				<maml:description>
+					<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				<dev:type>
+					<maml:name>switch</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue>$false</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>Timeout</maml:name>
+				<maml:description>
+					<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+				<command:parameterValueGroup>
+					<command:parameterValue required="false" variableLength="false">1-60</command:parameterValue>
+				</command:parameterValueGroup>
+				<dev:type>
+					<maml:name>Int</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue>5</dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:examples>
+			<!-- Examples-->
+			<command:example>
+				<maml:title>Example 1</maml:title>
+				<maml:introduction>
+					<maml:para />
+				</maml:introduction>
+				<dev:code>C:\PS&gt; Send-CEcho -HostName www.dicomserver.co.uk -Port 11112
+
+Hostname              Port  ResponseTime Status
+--------              ----  ------------ ------
+www.dicomserver.co.uk 11112 1587 ms      Success</dev:code>
+				<dev:remarks>
+					<maml:para />
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<!-- Links-->
+			<maml:navigationLink>
+				<maml:linkText>Project site</maml:linkText>
+				<maml:uri>https://github.com/RobHolme/DicomTools#send-cecho</maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2021 v2.3.50-->
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<!--TAG: HASCOMMONPARAMETERS-->
+		<!-- Command-->
+		<command:details>
+			<command:name>Send-CFind</command:name>
+			<maml:description>
+				<maml:para>Send a C-FIND query to a DICOM interface, display the results returned.</maml:para>
+			</maml:description>
+			<maml:copyright>
+				<maml:para />
+			</maml:copyright>
+			<command:verb>Send</command:verb>
+			<command:noun>CFind</command:noun>
+			<dev:version />
+		</command:details>
+		<maml:description>
+			<maml:para>Send a C-FIND query to a DICOM interface, display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters.</maml:para>
+			<maml:para>Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.</maml:para>
+		</maml:description>
+		<command:syntax>
+			<!-- Parameter Sets-->
+			<command:syntaxItem parametersetname="PatientName" default="true">
+				<!--TAG: DEFAULT-->
+				<!--NAME: PatientName-->
+				<maml:name>Send-CFind</maml:name>
+				<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Hostname</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">string</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Port</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The port number of the remote DICOM interface.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">LocalAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The local (calling) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">DICOMTOOLS-SCU</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">RemoteAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The remote (called) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">ANY-SCP</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>PatientName</maml:name>
+					<maml:description>
+						<maml:para>The name of the patient to search for. Can include '*' for wildcard searches.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Modality </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search to a modality type.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>StartDate </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or after this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>EndDate</maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or before this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">UseTLS</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+					</maml:description>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">switch</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">$false</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Timeout</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-60</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">5</dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+			<command:syntaxItem parametersetname="PatientID">
+				<!--NAME: PatientID-->
+				<maml:name>Send-CFind</maml:name>
+				<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Hostname</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">string</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Port</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The port number of the remote DICOM interface.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">LocalAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The local (calling) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">DICOMTOOLS-SCU</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">RemoteAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The remote (called) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">ANY-SCP</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>PatientID</maml:name>
+					<maml:description>
+						<maml:para>The patient ID to search for. Can include '*' for wildcard searches.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Modality </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search to a modality type.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>StartDate </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or after this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>EndDate</maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or before this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">UseTLS</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+					</maml:description>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">switch</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">$false</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Timeout</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-60</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">5</dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+			<command:syntaxItem parametersetname="StudyID">
+				<!--NAME: StudyID-->
+				<maml:name>Send-CFind</maml:name>
+				<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Hostname</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">string</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Port</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The port number of the remote DICOM interface.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">LocalAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The local (calling) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">DICOMTOOLS-SCU</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">RemoteAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The remote (called) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">ANY-SCP</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>StudyID</maml:name>
+					<maml:description>
+						<maml:para>The study instance ID to search for. Can include '*' for wildcard searches.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Modality </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search to a modality type.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>StartDate </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or after this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>EndDate</maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or before this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">UseTLS</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+					</maml:description>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">switch</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">$false</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Timeout</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-60</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">5</dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+			<command:syntaxItem parametersetname="AccessionNumber">
+				<!--NAME: AccessionNumber-->
+				<maml:name>Send-CFind</maml:name>
+				<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Hostname</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">string</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Port</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The port number of the remote DICOM interface.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">LocalAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The local (calling) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">DICOMTOOLS-SCU</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">RemoteAETitle</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The remote (called) AE Title</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">ANY-SCP</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>AccessionNumber </maml:name>
+					<maml:description>
+						<maml:para>The Accession number to search for. Can include '*' for wildcard searches.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Modality </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search to a modality type.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>StartDate </maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or after this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>EndDate</maml:name>
+					<maml:description>
+						<maml:para>Constrain the search for studies acquired on or before this date. Accepts any string that can be parsed as a date.</maml:para>
+					</maml:description>
+					<dev:type>
+						<maml:name />
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">UseTLS</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+					</maml:description>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">switch</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">$false</dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Timeout</maml:name>
+					<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+						<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+					<command:parameterValueGroup>
+						<command:parameterValue required="false" variableLength="false">1-60</command:parameterValue>
+					</command:parameterValueGroup>
+					<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+						<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+						<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+					</dev:type>
+					<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">5</dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<!-- All Parameters-->
+			<command:parameter required="false" globbing="true" pipelineInput="False" variableLength="false" position="named" aliases="IPAddress" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+				<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Hostname</maml:name>
+				<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">string</maml:name>
+					<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				</dev:type>
+				<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+				<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Port</maml:name>
+				<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+					<maml:para>The port number of the remote DICOM interface.</maml:para>
+				</maml:description>
+				<command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+				<command:parameterValueGroup>
+					<command:parameterValue required="false" variableLength="false">1-65535</command:parameterValue>
+				</command:parameterValueGroup>
+				<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+					<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				</dev:type>
+				<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+				<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">LocalAETitle</maml:name>
+				<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+					<maml:para>The local (calling) AE Title</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+					<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				</dev:type>
+				<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">DICOMTOOLS-SCU</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+				<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">RemoteAETitle</maml:name>
+				<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+					<maml:para>The remote (called) AE Title</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">String</maml:name>
+					<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				</dev:type>
+				<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">ANY-SCP</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+				<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">UseTLS</maml:name>
+				<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+					<maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">switch</maml:name>
+					<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				</dev:type>
+				<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">$false</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+				<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Timeout</maml:name>
+				<maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+					<maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">Int</command:parameterValue>
+				<command:parameterValueGroup>
+					<command:parameterValue required="false" variableLength="false">1-60</command:parameterValue>
+				</command:parameterValueGroup>
+				<dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+					<maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">Int</maml:name>
+					<maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+				</dev:type>
+				<dev:defaultValue xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">20</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>PatientName</maml:name>
+				<maml:description>
+					<maml:para>The name of the patient to search for. Can include '*' for wildcard searches.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>PatientID</maml:name>
+				<maml:description>
+					<maml:para>The patient ID to search for. Can include '*' for wildcard searches.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>StudyID</maml:name>
+				<maml:description>
+					<maml:para>The study instance ID to search for. Can include '*' for wildcard searches.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>AccessionNumber </maml:name>
+				<maml:description>
+					<maml:para>The Accession number to search for. Can include '*' for wildcard searches.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>Modality </maml:name>
+				<maml:description>
+					<maml:para>Constrain the search to a modality type.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>StartDate </maml:name>
+				<maml:description>
+					<maml:para>Constrain the search for studies acquired on or after this date. Accepts any string that can be parsed as a date.</maml:para>
+				</maml:description>
+				<dev:type>
+					<maml:name />
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>EndDate</maml:name>
+				<maml:description>
+					<maml:para>Constrain the search for studies acquired on or before this date. Accepts any string that can be parsed as a date.</maml:para>
+				</maml:description>
+				<dev:type>
+					<maml:name />
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+		</command:parameters>
+		<command:examples>
+			<!-- Examples-->
+			<command:example>
+				<maml:title>EXAMPLE 1</maml:title>
+				<maml:introduction>
+					<maml:para />
+				</maml:introduction>
+				<dev:code>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -PatientName test
+
+PatientName  PatientID  BirthDate Sex Modality StudyDate              AccessionNumber StudyInstanceID
+-----------  ---------  --------- --- -------- ---------              --------------- ---------------
+test^test    EkeaB142dw 20210708  M   DOC      15/07/2021 12:00:00 AM                 1.2.276.0.7230010.3.1.2.8323328.16910.16…
+test^test    EkeaB142dw 20210708  M   DOC      15/07/2021 12:00:00 AM                 1.2.276.0.7230010.3.1.2.8323328.18104.16…
+test^test    EkeaB142dw 20210708  M   DOC      15/07/2021 12:00:00 AM                 1.2.276.0.7230010.3.1.2.8323328.18673.16…
+test         3          20210616  O   SC       13/01/2021 10:13:51 AM                 2.25.12671083270627443311864223603381287…
+test         3          20210616  O   SC       13/01/2021 10:13:51 AM                 2.25.22697510870666633359788882595239852…
+test         3          20210616  O   SC       17/07/2021 12:20:25 PM                 2.25.15048971584590926188919414102281229…
+Test^Patient 0          19600709  F   OAM      9/07/2020 11:31:11 AM                  1.2.276.0.75.2.1.11.1.1.200709113729721.…</dev:code>
+				<dev:remarks>
+					<maml:para>Find all patients where Patient Name is 'Test'</maml:para>
+					<maml:para></maml:para>
+					<maml:para></maml:para>
+					<maml:para />
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>EXAMPLE 2</maml:title>
+				<maml:introduction>
+					<maml:para />
+				</maml:introduction>
+				<dev:code>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -PatientID 123*
+
+PatientName    PatientID  BirthDate Sex Modality StudyDate             AccessionNumber StudyInstanceID
+-----------    ---------  --------- --- -------- ---------             --------------- ---------------
+*001           1234567890 20150511  F   CR       11/05/2015 4:26:38 AM 19035189        1.2.826.0.1.3680043.6.98861.89036.20150…
+DEMO_RECORDING 123456                   XA       24/08/2021 3:22:41 PM                 2.25.1788281389745095966601891702358043…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:06 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:12 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:14 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:15 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:16 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:18 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:10:58 PM  7654321         1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       19/07/2021 9:34:53 AM                 1.2.826.0.1.3680043.2.891.113.202107190…</dev:code>
+				<dev:remarks>
+					<maml:para>Find all patients with Patient ID starting with '123'</maml:para>
+					<maml:para></maml:para>
+					<maml:para></maml:para>
+					<maml:para />
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>EXAMPLE 3</maml:title>
+				<maml:introduction>
+					<maml:para />
+				</maml:introduction>
+				<dev:code>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -PatientName * -Modality CT -startDate 'Jan 1 2020' -EndDate '31/12/2020' 
+
+PatientName PatientID BirthDate Sex Modality StudyDate             AccessionNumber StudyInstanceID
+----------- --------- --------- --- -------- ---------             --------------- ---------------
+.           139091                  CT       28/01/2020 5:29:09 PM                 1.3.6.1.4.1.5962.99.1.822597906.190419455.1…
+.           139091                  CT       28/01/2020 5:29:09 PM                 1.3.6.1.4.1.5962.99.1.831748304.238282405.1…
+.           139091                  CT       5/02/2020 2:47:03 PM                  1.3.6.1.4.1.5962.99.1.822597906.190419455.1…
+.           139091                  CT       13/02/2020 9:08:15 AM                 1.3.6.1.4.1.5962.99.1.822597906.190419455.1…
+Anonymous   Anonymous               CT       9/12/2020 8:34:04 PM                  2.16.840.1.114540.200114023.27924</dev:code>
+				<dev:remarks>
+					<maml:para>Find all CT scans acquired from 1 Jan 2020 through to 31 Dec 2020</maml:para>
+					<maml:para></maml:para>
+					<maml:para></maml:para>
+					<maml:para />
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>EXAMPLE 4</maml:title>
+				<maml:introduction>
+					<maml:para />
+				</maml:introduction>
+				<dev:code>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -StudyID 1.2.826.0.1.3680043.2.891.113.20210702141058064482710
+
+PatientName PatientID BirthDate Sex Modality StudyDate            AccessionNumber StudyInstanceID
+----------- --------- --------- --- -------- ---------            --------------- ---------------
+Tester^Test 12345     19850202  M   ES       2/07/2021 2:10:58 PM 7654321         1.2.826.0.1.3680043.2.891.113.20210702141058064482710</dev:code>
+				<dev:remarks>
+					<maml:para>Find patient details for Study Instance ID of '1.2.826.0.1.3680043.2.891.113.20210702141058064482710'</maml:para>
+					<maml:para></maml:para>
+					<maml:para></maml:para>
+					<maml:para />
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<!-- Links-->
+			<maml:navigationLink>
+				<maml:linkText>Project site</maml:linkText>
+				<maml:uri>https://github.com/RobHolme/DicomTools#send-cfind</maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2021 v2.3.50-->
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<!--TAG: HASCOMMONPARAMETERS-->
+		<!-- Command-->
+		<command:details>
+			<command:name>Get-DicomTag</command:name>
+			<maml:description>
+				<maml:para>Displays the DICOM tags from a DICOM file.</maml:para>
+			</maml:description>
+			<maml:copyright>
+				<maml:para />
+			</maml:copyright>
+			<command:verb>Get</command:verb>
+			<command:noun>DicomTag</command:noun>
+			<dev:version />
+		</command:details>
+		<maml:description>
+			<maml:para>Displays the DICOM tags from a DICOM file.</maml:para>
+		</maml:description>
+		<command:syntax>
+			<!-- Parameter Sets-->
+			<command:syntaxItem parametersetname="Path">
+				<!--NAME: Path-->
+				<maml:name>Get-DicomTag</maml:name>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>Path</maml:name>
+					<maml:description>
+						<maml:para>The path of the DICOM file(s). Can include wildcards or regular expressions to specify multiple files.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+			</command:syntaxItem>
+			<command:syntaxItem parametersetname="LiteralPath">
+				<!--NAME: LiteralPath-->
+				<maml:name>Get-DicomTag</maml:name>
+				<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+					<maml:name>LiteralPath</maml:name>
+					<maml:description>
+						<maml:para>The literal path to a DICOM file.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:type>
+						<maml:name>String</maml:name>
+						<maml:uri />
+					</dev:type>
+					<dev:defaultValue />
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<!-- All Parameters-->
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>Path</maml:name>
+				<maml:description>
+					<maml:para>The path of the DICOM file(s). Can include wildcards or regular expressions to specify multiple files.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="False" variableLength="false" position="named">
+				<maml:name>LiteralPath</maml:name>
+				<maml:description>
+					<maml:para>The literal path to a DICOM file.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+		</command:parameters>
+		<maml:relatedLinks>
+			<!-- Links-->
+			<maml:navigationLink>
+				<maml:linkText>Projet site</maml:linkText>
+				<maml:uri>https://github.com/RobHolme/DicomTools#get-dicomtag</maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2021 v2.3.50-->
+</helpItems>
