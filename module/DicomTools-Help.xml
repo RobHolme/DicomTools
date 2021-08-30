@@ -222,7 +222,7 @@ www.dicomserver.co.uk 11112 1587 ms      Success</dev:code>
 		</command:details>
 		<maml:description>
 			<maml:para>Send a C-FIND query to a DICOM interface, display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters.</maml:para>
-			<maml:para>Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.</maml:para>
+			<maml:para>Search by values provided in either PatientName, PatientID, StudyID, or AccessionNumber parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.</maml:para>
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
