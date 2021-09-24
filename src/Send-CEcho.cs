@@ -161,12 +161,13 @@ namespace DicomTools {
 					WriteVerbose(verboseString);
 				}
 
-				// check to see if the task timed out, otherwise return results.
+				// check to see if the task timed out. Write the results to the pipeline
 				if (cancelToken.IsCancellationRequested) {
-					WriteWarning($"The C-ECHO query timed out (timeout set to {timeoutInSeconds} seconds). Use -Timeout to increase duration.");
+					WriteVerbose($"The C-ECHO query timed out (timeout set to {timeoutInSeconds} seconds). Use -Timeout to increase duration.");
+					var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, "Failed: Connection timeout", timer.ElapsedMilliseconds);
+					WriteObject(result);
 				}
 				else {
-					// write the results to the pipeline
 					var result = new SendCEchoResult(dicomRemoteHost, dicomRemoteHostPort, responseStatus, timer.ElapsedMilliseconds);
 					WriteObject(result);
 				}
