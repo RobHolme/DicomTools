@@ -11,3 +11,4 @@
 * 1.2.4 - Added support for reporting all Modalities in a study.  
 * 1.2.5 - Added -AccessionNumber parameter to search on Accession Number.
 * 1.2.6 - Added help file
+* 1.2.7 - Updated module to support Windows Powershell (in addition to Microsoft Powershell (core))
