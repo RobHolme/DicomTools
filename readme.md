@@ -5,7 +5,6 @@ This PowerShell module is a small collection of CmdLets to test DICOM interfaces
 * __Send-CFind__: send a DICOM C-Find request to a DICOM endpoint, display the results returned.
 * __Get-DicomTag__: list the DICOM tags from a DICOM file.
 
-For Powershell Core v7+ only, this module does not support Windows PowerShell.
 
 This module uses the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-dicom/fo-dicom
 
@@ -14,15 +13,13 @@ Either build the solution (instructions below), or download the latest release f
 
 Copy the contents of the /module folder (or extract the files from the release) to a folder named 'DicomTools' in the Powershell module path (use $env:PSModulePath to list all paths). 
 
-Requires PowerShell 7.0 or greater, Windows Powershell is not supported.
+Supports Windows Powershell 5.x and Microsoft PowerShell 7+.
 ## Build instructions
 Install the .Net Core 3.1 SDK (https://dotnet.microsoft.com/download/visual-studio-sdks). 
 
-Edit the SDK version in global.json. 
+Edit the SDK version in global.json (if later than 3.1.412). 
 
 Run ```dotnet build --configuration Release```
-
-Copy the built DicomTools.dll to .\module\lib.
 
 
 # CmdLet Usage 
