@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
 	<EnableDefaultItems>true</EnableDefaultItems>
 	<Version>1.2.6</Version>
@@ -10,17 +10,21 @@
     <FileVersion>1.2.6.0</FileVersion>
     <Description>Powershell Core module for DICOM testing</Description>
 	<RepositoryUrl>https://github.com/RobHolme/DicomTools</RepositoryUrl>
-    <PostBuildEvent>XCOPY /Y "$(TargetDir)DICOMtools.dll" "$(ProjectDir)..\..\..\module\lib\"</PostBuildEvent>
-  </PropertyGroup>
+	<PlatformTarget>x64</PlatformTarget>
+    <PostBuildEvent>XCOPY /Y "$(TargetDir)DicomTools.dll" "$(ProjectDir)..\..\..\module\lib\$(TargetFramework)"</PostBuildEvent>
+	</PropertyGroup>
   
-  <ItemGroup>
-  	<PackageReference Include="fo-dicom.NetCore" Version="4.0.7" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+  	<PackageReference Include="fo-dicom.NetCore" Version="4.0.7"/>
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net45'))" >
+  	<PackageReference Include="fo-dicom.Desktop" Version="4.0.7"/>
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
