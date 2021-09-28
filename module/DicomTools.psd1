@@ -37,7 +37,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) 2021 Rob Holme. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Powershell tool for DICOM testing. Uses fo-dicom library'
+Description = 'Powershell module for DICOM testing. Uses fo-dicom library'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = '7.0'
