@@ -9,13 +9,20 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'lib\Dicomtools.dll'
+RootModule = if($PSEdition -eq 'Core')
+{
+    'lib\netstandard2.0\DicomTools.dll'
+}
+else # Desktop
+{
+    'lib\net45\DicomTools.dll'
+}
 
 # Version number of this module.
-ModuleVersion = '1.2.6'
+ModuleVersion = '1.2.7'
 
 # Supported PSEditions
-CompatiblePSEditions = @('Core')
+# CompatiblePSEditions = @('Core')
 
 # ID used to uniquely identify this module
 GUID = 'd14fb1cb-55ed-449d-b8b5-c38f63af482e'
@@ -33,7 +40,7 @@ Copyright = '(c) 2021 Rob Holme. All rights reserved.'
 Description = 'Powershell tool for DICOM testing. Uses fo-dicom library'
 
 # Minimum version of the PowerShell engine required by this module
-PowerShellVersion = '7.0'
+# PowerShellVersion = '7.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -95,7 +102,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('DICOM','PSEdition_Core', 'Windows', 'Linux', 'MacOS')
+        Tags = @('DICOM','PSEdition_Core', 'PSEdition_Desktop', 'Windows', 'Linux', 'MacOS')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/RobHolme/DicomTools/blob/master/LICENSE'
@@ -123,7 +130,7 @@ PrivateData = @{
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-# HelpInfoURI = ''
+HelpInfoURI = 'https://github.com/RobHolme/DicomTools#cmdlet-usage'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''
