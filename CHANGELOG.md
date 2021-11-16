@@ -13,3 +13,4 @@
 * 1.2.6 - Added help file
 * 1.2.7 - Updated module to support Windows Powershell (in addition to Microsoft Powershell (core))
 * 1.2.8 - Incremented module version to fix publishing error on PSGallery
+* 1.2.9 - Added alias 'CallingAETitle' to LocalAETitle parameter. Added alias 'CalledAETitle' to RemoteAETitle parameter
