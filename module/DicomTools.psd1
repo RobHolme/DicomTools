@@ -15,11 +15,11 @@ RootModule = if($PSEdition -eq 'Core')
 }
 else # Desktop
 {
-    'lib\net45\DicomTools.dll'
+    'lib\net452\DicomTools.dll'
 }
 
 # Version number of this module.
-ModuleVersion = '1.2.9'
+ModuleVersion = '1.2.10'
 
 # Supported PSEditions
 # CompatiblePSEditions = @('Core')
@@ -79,7 +79,7 @@ FormatsToProcess = @('DicomTools.format.ps1xml')
 FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = @('Send-CEcho','Get-DicomTag','Send-CFind')
+CmdletsToExport = @('Send-CEcho','Get-DicomTag','Send-CFind', 'Send-DMWLQuery')
 
 # Variables to export from this module
 VariablesToExport = @()
