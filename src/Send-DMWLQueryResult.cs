@@ -11,10 +11,12 @@ namespace DicomTools {
 		private string patientBirthDate;
 		private string patientSex;
 		private string modalitiesInStudy;
+		private string modality;
 		private DateTime? studyDate;
 		private string studyInstanceID;
 		private string accessionNumber;
 		private string studyDescription;
+		private string scheduledAETitle;
 
 
 		/// <summary>
@@ -53,8 +55,8 @@ namespace DicomTools {
 		/// The modality type
 		/// </summary>
 		public string Modality {
-			get { return modalitiesInStudy; }
-			set { this.modalitiesInStudy = value; }
+			get { return modality; }
+			set { this.modality = value; }
 		}
 
 		/// <summary>
@@ -68,9 +70,9 @@ namespace DicomTools {
 		/// <summary>
 		/// The study instance ID
 		/// </summary>
-		public string StudyInstanceID {
-			get { return studyInstanceID; }
-			set { this.studyInstanceID = value; }
+		public string ScheduledAETitle {
+			get { return scheduledAETitle; }
+			set { this.scheduledAETitle = value; }
 		}
 
 		/// <summary>
@@ -89,16 +91,21 @@ namespace DicomTools {
 			set { this.studyDescription = value; }
 		}
 
+
 		/// <summary>
 		/// Populate the class members with resuls from the C-Echo
 		/// </summary>
 		/// <param name="ItemValue"></param>
 //		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, DateTime? StudyDate, string StudyInstanceID, string AccessionNumber, string StudyDescription) {
-			public SendDMWLQueryResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex) {
+			public SendDMWLQueryResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string Modality, string ScheduledAETitle, string AccessionNumber, string StudyDescription) {
 			this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
 			this.patientSex = PatientSex;
+			this.modality = Modality;
+			this.scheduledAETitle = ScheduledAETitle;
+			this.studyDescription = StudyDescription;
+			this.accessionNumber = AccessionNumber;
 //			this.modalitiesInStudy = ModalitiesInStudy;
 //			this.studyDate = StudyDate;
 //			this.studyInstanceID = StudyInstanceID;

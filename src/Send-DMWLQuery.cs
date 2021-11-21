@@ -265,24 +265,26 @@ namespace DicomTools {
 				// event handler - response received from C-Find request
 				cFindRequest.OnResponseReceived += (request, response) => {
 					if (response.Status == DicomStatus.Pending) {
-						var responseModality = "";
 						var responsePatientName = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientName, string.Empty);
 						var responsePatientID = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientID, string.Empty);
 						var responsePatientDOB = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientBirthDate, string.Empty);
 						var responsePatientSex = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientSex, string.Empty);
+						var responseScheduledAETitle = response.Dataset.GetSingleValueOrDefault(DicomTag.ScheduledStationAETitle, string.Empty);
+						var responseModality = response.Dataset.GetSingleValueOrDefault(DicomTag.Modality, string.Empty);				
+//						var responseModality = "";
 //						string[] responseModalitiesInStudy = response.Dataset.GetValues<string>(DicomTag.ModalitiesInStudy);
 //						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
 //						var responseStudyTime = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyTime, string.Empty);
 //						var responseStudyUID = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, string.Empty);
-//						var responseAccessionNumber = response.Dataset.GetSingleValueOrDefault(DicomTag.AccessionNumber, string.Empty);
-//						var responseStudyDescription = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDescription, string.Empty);
+						var responseAccessionNumber = response.Dataset.GetSingleValueOrDefault(DicomTag.AccessionNumber, string.Empty);
+						var responseStudyDescription = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDescription, string.Empty);
 //						foreach (string modality in responseModalitiesInStudy) {
 //							responseModality += $",{modality}";
 //						}
 //						responseModality = responseModality.Substring(1);
 						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
 //						DateTime? responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
-						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex));
+						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseScheduledAETitle, responseAccessionNumber, responseStudyDescription));
 					}
 				};
 
