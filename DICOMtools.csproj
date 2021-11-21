@@ -4,10 +4,10 @@
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
 	<EnableDefaultItems>true</EnableDefaultItems>
-	<Version>1.2.7</Version>
+	<Version>1.2.9</Version>
 	<Authors>Rob Holme</Authors>
 	<Product>DICOM Testing Module for Powershell</Product>
-    <FileVersion>1.2.7.0</FileVersion>
+    <FileVersion>1.2.9.0</FileVersion>
     <Description>Powershell module for DICOM testing</Description>
 	<RepositoryUrl>https://github.com/RobHolme/DicomTools</RepositoryUrl>
 	<PlatformTarget>x64</PlatformTarget>

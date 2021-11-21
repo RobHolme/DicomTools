@@ -72,6 +72,7 @@ namespace DicomTools {
 			Position = 3,
 			HelpMessage = "The client calling AE title"
 		)]
+		[Alias("CallingAETitle")]
 		public string LocalAETitle {
 			get { return this.callingDicomAeTitle; }
 			set { this.callingDicomAeTitle = value; }
@@ -83,6 +84,7 @@ namespace DicomTools {
 			Position = 4,
 			HelpMessage = "The server called AE title"
 		)]
+		[Alias("CalledAETitle")]
 		public string RemoteAETitle {
 			get { return this.calledDicomAeTitle; }
 			set { this.calledDicomAeTitle = value; }
