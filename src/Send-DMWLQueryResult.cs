@@ -107,7 +107,7 @@ namespace DicomTools {
 			this.studyDescription = StudyDescription;
 			this.accessionNumber = AccessionNumber;
 //			this.modalitiesInStudy = ModalitiesInStudy;
-//			this.studyDate = StudyDate;
+			this.studyDate = StudyDate;
 //			this.studyInstanceID = StudyInstanceID;
 //			this.accessionNumber = AccessionNumber;
 //			this.studyDescription = StudyDescription;

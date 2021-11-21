@@ -229,7 +229,12 @@ namespace DicomTools {
 				client.Options = new Dicom.Network.DicomServiceOptions();
 				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
 				client.NegotiateAsyncOps();
-				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(patientName: this.patientName);
+				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(
+					patientName: this.patientName,
+					patientId: this.patientID,
+					stationAE: this.stationAETitle,
+					stationName: this.stationName,
+					modality: this.modalityType);
 
 /*
 				// The attributes to be returned in the result need to be specified with empty parameters.
@@ -275,16 +280,19 @@ namespace DicomTools {
 //						string[] responseModalitiesInStudy = response.Dataset.GetValues<string>(DicomTag.ModalitiesInStudy);
 //						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
 //						var responseStudyTime = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyTime, string.Empty);
+//						DateTime? responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
 //						var responseStudyUID = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, string.Empty);
 						var responseAccessionNumber = response.Dataset.GetSingleValueOrDefault(DicomTag.AccessionNumber, string.Empty);
-						var responseStudyDescription = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDescription, string.Empty);
+						var responseRequestedProcedureDescription = response.Dataset.GetSingleValueOrDefault(DicomTag.RequestedProcedureDescription, string.Empty);
 //						foreach (string modality in responseModalitiesInStudy) {
 //							responseModality += $",{modality}";
 //						}
 //						responseModality = responseModality.Substring(1);
 						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
-//						DateTime? responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
-						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseScheduledAETitle, responseAccessionNumber, responseStudyDescription));
+//						DicomSequence[] stepSequence = response.Dataset.GetValues<DicomSequence>(DicomTag.ScheduledProcedureStepSequence);
+						
+						
+						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseScheduledAETitle, responseAccessionNumber, responseRequestedProcedureDescription));
 					}
 				};
 
