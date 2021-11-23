@@ -111,10 +111,10 @@ namespace DicomTools {
 
 		// Patient name
 		[Parameter(
-			Mandatory = true,
+			Mandatory = false,
 			Position = 7,
-			HelpMessage = "The patient name to search for",
-			ParameterSetName = "PatientDemographics"
+			HelpMessage = "The patient name to search for"
+//			ParameterSetName = "PatientDemographics"
 		)]
 		public string PatientName {
 			get { return this.patientName; }
@@ -123,10 +123,10 @@ namespace DicomTools {
 
 		// Patient ID
 		[Parameter(
-			Mandatory = true,
+			Mandatory = false,
 			Position = 7,
-			HelpMessage = "The patient name to search for",
-			ParameterSetName = "PatientID"
+			HelpMessage = "The patient name to search for"
+//			ParameterSetName = "PatientID"
 		)]
 		public string PatientID {
 			get { return this.patientID; }
