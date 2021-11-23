@@ -17,6 +17,7 @@ namespace DicomTools {
 		private string accessionNumber;
 		private string studyDescription;
 		private string scheduledAETitle;
+		private string stepCount;
 
 
 		/// <summary>
@@ -52,6 +53,14 @@ namespace DicomTools {
 		}
 
 		/// <summary>
+		/// The number of procedure steps
+		/// </summary>
+		public string Steps {
+			get { return stepCount; }
+			set { this.stepCount = value; }
+		}
+
+		/// <summary>
 		/// The modality type
 		/// </summary>
 		public string Modality {
@@ -65,14 +74,6 @@ namespace DicomTools {
 		public DateTime? StudyDate {
 			get { return studyDate; }
 			set { this.studyDate = value; }
-		}
-
-		/// <summary>
-		/// The study instance ID
-		/// </summary>
-		public string ScheduledAETitle {
-			get { return scheduledAETitle; }
-			set { this.scheduledAETitle = value; }
 		}
 
 		/// <summary>
@@ -97,16 +98,15 @@ namespace DicomTools {
 		/// </summary>
 		/// <param name="ItemValue"></param>
 //		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, DateTime? StudyDate, string StudyInstanceID, string AccessionNumber, string StudyDescription) {
-			public SendDMWLQueryResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string Modality, string ScheduledAETitle, string AccessionNumber, string StudyDescription) {
+			public SendDMWLQueryResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string StepCount, string Modality, string AccessionNumber, string StudyDescription) {
 			this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
 			this.patientSex = PatientSex;
+			this.stepCount = StepCount;
 			this.modality = Modality;
-			this.scheduledAETitle = ScheduledAETitle;
 			this.studyDescription = StudyDescription;
 			this.accessionNumber = AccessionNumber;
-//			this.modalitiesInStudy = ModalitiesInStudy;
 			this.studyDate = StudyDate;
 //			this.studyInstanceID = StudyInstanceID;
 //			this.accessionNumber = AccessionNumber;

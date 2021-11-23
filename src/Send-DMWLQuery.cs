@@ -278,11 +278,11 @@ namespace DicomTools {
 					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
 				//	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
 				}
-
+*/
 				// The encoding of the results ('ISO_IR 100' is 'Latin Alphabet No. 1').  
 				// http://dicom.nema.org/dicom/2013/output/chtml/part02/sect_D.6.html
 				cFindRequest.Dataset.AddOrUpdate(new DicomTag(0x8, 0x5), "ISO_IR 100");
-*/
+
 				// list to store the results returned
 				var cFindResultList = new List<SendDMWLQueryResult>();
 
@@ -293,9 +293,8 @@ namespace DicomTools {
 						var responsePatientID = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientID, string.Empty);
 						var responsePatientDOB = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientBirthDate, string.Empty);
 						var responsePatientSex = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientSex, string.Empty);
-						var responseScheduledAETitle = response.Dataset.GetSingleValueOrDefault(DicomTag.ScheduledStationAETitle, string.Empty);
+//						var responseScheduledAETitle = response.Dataset.GetSingleValueOrDefault(DicomTag.ScheduledStationAETitle, string.Empty);
 //						var responseModality = response.Dataset.GetSingleValueOrDefault(DicomTag.Modality, string.Empty);				
-//						var responseModality = "";
 //						string[] responseModalitiesInStudy = response.Dataset.GetValues<string>(DicomTag.ModalitiesInStudy);
 //						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
 //						var responseStudyTime = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyTime, string.Empty);
@@ -310,9 +309,13 @@ namespace DicomTools {
 						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
 //						DicomSequence[] stepSequence = response.Dataset.GetValues<DicomSequence>(DicomTag.ScheduledProcedureStepSequence);
 						DicomSequence stepSequence = response.Dataset.GetSequence(DicomTag.ScheduledProcedureStepSequence);
-						var responseModality = stepSequence.Items[0].GetSingleValueOrDefault(DicomTag.Modality, string.Empty);
-						var responseStationAETitle = stepSequence.Items[0].GetSingleValueOrDefault(DicomTag.StationAETitle, string.Empty);
-						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, responseModality, responseStationAETitle, responseAccessionNumber, responseRequestedProcedureDescription));
+//						var responseModality = stepSequence.Items[0].GetSingleValueOrDefault(DicomTag.Modality, string.Empty);
+						var responseModality = "";
+						foreach (var step in stepSequence.Items) {
+							responseModality += $",{step.GetSingleValueOrDefault(DicomTag.Modality, string.Empty)}";
+						}
+						responseModality = responseModality.Substring(1);
+						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, stepSequence.Items.Count.ToString(), responseModality, responseAccessionNumber, responseRequestedProcedureDescription));
 					}
 				};
 
