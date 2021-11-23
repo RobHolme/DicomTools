@@ -229,6 +229,7 @@ namespace DicomTools {
 				client.Options = new Dicom.Network.DicomServiceOptions();
 				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
 				client.NegotiateAsyncOps();
+
 				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(
 					patientId: this.patientID,
 					patientName: this.patientName,
@@ -236,6 +237,22 @@ namespace DicomTools {
 					stationName: this.stationName,
 					modality: this.modalityType,
 					scheduledDateTime: null);
+ 	
+var sps = new DicomDataset();
+            sps.Add(DicomTag.ScheduledStationAETitle, this.stationAETitle);
+            sps.Add(DicomTag.ScheduledStationName, this.stationName);
+            sps.Add(DicomTag.ScheduledProcedureStepStartDate, string.Empty);
+            sps.Add(DicomTag.ScheduledProcedureStepStartTime, string.Empty);
+            sps.Add(DicomTag.Modality, this.modalityType);
+            sps.Add(DicomTag.ScheduledPerformingPhysicianName, String.Empty);
+            sps.Add(DicomTag.ScheduledProcedureStepDescription, String.Empty);
+            sps.Add(new DicomSequence(DicomTag.ScheduledProtocolCodeSequence));
+            sps.Add(DicomTag.ScheduledProcedureStepLocation, String.Empty);
+            sps.Add(DicomTag.ScheduledProcedureStepID, String.Empty);
+            sps.Add(DicomTag.RequestedContrastAgent, String.Empty);
+            sps.Add(DicomTag.PreMedication, String.Empty);
+            sps.Add(DicomTag.AnatomicalOrientationType, String.Empty);
+            cFindRequest.Dataset.AddOrUpdate(new DicomSequence(DicomTag.ScheduledProcedureStepSequence, sps));
 
 
 /*
