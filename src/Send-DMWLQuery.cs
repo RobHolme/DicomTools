@@ -230,11 +230,13 @@ namespace DicomTools {
 				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
 				client.NegotiateAsyncOps();
 				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(
-					patientName: this.patientName,
 					patientId: this.patientID,
+					patientName: this.patientName,
 					stationAE: this.stationAETitle,
 					stationName: this.stationName,
-					modality: this.modalityType);
+					modality: this.modalityType,
+					scheduledDateTime: null);
+
 
 /*
 				// The attributes to be returned in the result need to be specified with empty parameters.
