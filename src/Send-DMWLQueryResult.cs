@@ -4,20 +4,19 @@
 
 namespace DicomTools {
 	using System;
+	using System.Collections.Generic;
 
 	public class SendDMWLQueryResult {
 		private string patientName;
 		private string patientID;
 		private string patientBirthDate;
 		private string patientSex;
-		private string modalitiesInStudy;
 		private string modality;
 		private DateTime? studyDate;
-		private string studyInstanceID;
 		private string accessionNumber;
 		private string studyDescription;
-		private string scheduledAETitle;
 		private string stepCount;
+		private List<DicomTools.DMWLStepResult> procedureSteps;
 
 
 		/// <summary>
@@ -92,13 +91,19 @@ namespace DicomTools {
 			set { this.studyDescription = value; }
 		}
 
+		/// <summary>
+		/// The list of procedure steps
+		/// </summary>
+		public List<DicomTools.DMWLStepResult> ProcedureSteps {
+			get { return procedureSteps; }
+			set { this.procedureSteps = value; }
+		}
 
 		/// <summary>
 		/// Populate the class members with resuls from the C-Echo
 		/// </summary>
 		/// <param name="ItemValue"></param>
-//		public SendCFindResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string ModalitiesInStudy, DateTime? StudyDate, string StudyInstanceID, string AccessionNumber, string StudyDescription) {
-			public SendDMWLQueryResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string StepCount, string Modality, string AccessionNumber, string StudyDescription) {
+			public SendDMWLQueryResult(string PatientName, string PatientID, string PatientBirthDate, string PatientSex, string StepCount, string Modality, string AccessionNumber, string StudyDescription, List<DicomTools.DMWLStepResult> ProcedureSteps) {
 			this.patientName = PatientName;
 			this.patientID = PatientID;
 			this.patientBirthDate = PatientBirthDate;
@@ -108,10 +113,78 @@ namespace DicomTools {
 			this.studyDescription = StudyDescription;
 			this.accessionNumber = AccessionNumber;
 			this.studyDate = StudyDate;
-//			this.studyInstanceID = StudyInstanceID;
-//			this.accessionNumber = AccessionNumber;
-//			this.studyDescription = StudyDescription;
+			this.procedureSteps = ProcedureSteps;
+
 		}
+	}
+
+
+	
+	/// <summary>
+	/// An object containing individual DMWL step details
+	/// </summary>
+	public class DMWLStepResult {
+		private string stepId;
+		private string modality;
+		private string performingPhysician;
+		private string stepDescription;
+		private DateTime? stepDateTime;
+		
+		/// <summary>
+		/// The step ID
+		/// </summary>
+		public string StepID {
+			get { return this.stepId; }
+			set { this.stepId = value; }
+		}
+
+		/// <summary>
+		/// The modality type performing the step
+		/// </summary>
+		public string Modality {
+			get { return this.modality; }
+			set { this.modality = value; }
+		}
+
+		/// <summary>
+		/// The name of the physician  performing the step
+		/// </summary>
+		public string PerformingPhysician {
+			get { return this.performingPhysician; }
+			set { this.performingPhysician = value; }
+		}
+
+		/// <summary>
+		/// The date the study was acquired
+		/// </summary>
+		public DateTime? StepDateTime {
+			get { return stepDateTime; }
+			set { this.stepDateTime = value; }
+		}
+
+		/// <summary>
+		/// The step description
+		/// </summary>
+		public string StepDescription {
+			get { return this.stepDescription; }
+			set { this.stepDescription = value; }
+		}
+
+
+		/// <summary>
+		/// Populate the class members with resuls from the C-Echo
+		/// </summary>
+		/// <param name="ItemValue"></param>
+			public DMWLStepResult(string StepID, string Modality, string PerformingPhysician, DateTime? StepDateTime, string StepDescription) {
+			this.stepId = StepID;
+			this.modality = Modality;
+			this.performingPhysician = PerformingPhysician;
+			this.modality = Modality;
+			this.stepDescription = StepDescription;
+			this.stepDateTime = StepDateTime;
+
+		}
+
 	}
 }
 

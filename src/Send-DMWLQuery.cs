@@ -109,30 +109,6 @@ namespace DicomTools {
 			set { this.stationName = value; }
 		}
 
-		// Patient name
-		[Parameter(
-			Mandatory = false,
-			Position = 7,
-			HelpMessage = "The patient name to search for"
-//			ParameterSetName = "PatientDemographics"
-		)]
-		public string PatientName {
-			get { return this.patientName; }
-			set { this.patientName = value; }
-		}
-
-		// Patient ID
-		[Parameter(
-			Mandatory = false,
-			Position = 7,
-			HelpMessage = "The patient name to search for"
-//			ParameterSetName = "PatientID"
-		)]
-		public string PatientID {
-			get { return this.patientID; }
-			set { this.patientID = value; }
-		}
-
 		// Constrain results to specific modalities
 		[Parameter(
 			Mandatory = false,
@@ -202,7 +178,7 @@ namespace DicomTools {
 
 
 		/// <summary>
-		/// Process all C-FIND requests
+		/// Process all DMWL requests
 		/// </summary>
 		protected override void ProcessRecord() {
 			if (abortProcessing) {
@@ -230,58 +206,7 @@ namespace DicomTools {
 				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
 				client.NegotiateAsyncOps();
 
-				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(
-					patientId: this.patientID,
-					patientName: this.patientName,
-					stationAE: this.stationAETitle,
-					stationName: this.stationName,
-					modality: this.modalityType,
-					scheduledDateTime: null);
- 	
-/*var sps = new DicomDataset();
-            sps.Add(DicomTag.ScheduledStationAETitle, this.stationAETitle);
-            sps.Add(DicomTag.ScheduledStationName, this.stationName);
-            sps.Add(DicomTag.ScheduledProcedureStepStartDate, string.Empty);
-            sps.Add(DicomTag.ScheduledProcedureStepStartTime, string.Empty);
-            sps.Add(DicomTag.Modality, this.modalityType);
-            sps.Add(DicomTag.ScheduledPerformingPhysicianName, String.Empty);
-            sps.Add(DicomTag.ScheduledProcedureStepDescription, String.Empty);
-            sps.Add(new DicomSequence(DicomTag.ScheduledProtocolCodeSequence));
-            sps.Add(DicomTag.ScheduledProcedureStepLocation, String.Empty);
-            sps.Add(DicomTag.ScheduledProcedureStepID, String.Empty);
-            sps.Add(DicomTag.RequestedContrastAgent, String.Empty);
-            sps.Add(DicomTag.PreMedication, String.Empty);
-            sps.Add(DicomTag.AnatomicalOrientationType, String.Empty);
-            cFindRequest.Dataset.AddOrUpdate(new DicomSequence(DicomTag.ScheduledProcedureStepSequence, sps));
-*/
-
-/*
-				// The attributes to be returned in the result need to be specified with empty parameters.
-				// Populate attributes with values if to be used in the search query.
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientName, patientName);
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientID, patientID);
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientBirthDate, "");
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.PatientSex, "");
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.ModalitiesInStudy, modalityType);
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyInstanceUID, studyID);
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.AccessionNumber, accessionNumber);
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDescription, "");
-				cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
-				if ((studyDateStartString.Length > 0) | (studyDateEndString.Length > 0)) {
-					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, $"{studyRangeStartDate}-{studyRangeEndDate}");
-				// Not all PACS implement the time range consistently. 
-				// Some apply the time in addition to date range, i.e. only between the time range on each day, rather than start datetime and end datetime. 	
-				// removing to avoid different experiences between PACS.
-				//	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, $"{studyRangeStartTime}-{studyRangeEndTime}");
-				}
-				else {
-					cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyDate, "");
-				//	cFindRequest.Dataset.AddOrUpdate(DicomTag.StudyTime, "");
-				}
-*/
-				// The encoding of the results ('ISO_IR 100' is 'Latin Alphabet No. 1').  
-				// http://dicom.nema.org/dicom/2013/output/chtml/part02/sect_D.6.html
-				cFindRequest.Dataset.AddOrUpdate(new DicomTag(0x8, 0x5), "ISO_IR 100");
+				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(); // no filter, return all results.
 
 				// list to store the results returned
 				var cFindResultList = new List<SendDMWLQueryResult>();
@@ -293,29 +218,26 @@ namespace DicomTools {
 						var responsePatientID = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientID, string.Empty);
 						var responsePatientDOB = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientBirthDate, string.Empty);
 						var responsePatientSex = response.Dataset.GetSingleValueOrDefault(DicomTag.PatientSex, string.Empty);
-//						var responseScheduledAETitle = response.Dataset.GetSingleValueOrDefault(DicomTag.ScheduledStationAETitle, string.Empty);
-//						var responseModality = response.Dataset.GetSingleValueOrDefault(DicomTag.Modality, string.Empty);				
-//						string[] responseModalitiesInStudy = response.Dataset.GetValues<string>(DicomTag.ModalitiesInStudy);
-//						var responseStudyDate = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyDate, string.Empty);
-//						var responseStudyTime = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyTime, string.Empty);
-//						DateTime? responseStudyDateTime = ConvertDtToDateTime($"{responseStudyDate}{responseStudyTime.Split('.')[0]}");
-//						var responseStudyUID = response.Dataset.GetSingleValueOrDefault(DicomTag.StudyInstanceUID, string.Empty);
 						var responseAccessionNumber = response.Dataset.GetSingleValueOrDefault(DicomTag.AccessionNumber, string.Empty);
 						var responseRequestedProcedureDescription = response.Dataset.GetSingleValueOrDefault(DicomTag.RequestedProcedureDescription, string.Empty);
-//						foreach (string modality in responseModalitiesInStudy) {
-//							responseModality += $",{modality}";
-//						}
-//						responseModality = responseModality.Substring(1);
-						// convert the study date time string to a DateTime object (strip split seconds, too many different levels of precesion to handle)
-//						DicomSequence[] stepSequence = response.Dataset.GetValues<DicomSequence>(DicomTag.ScheduledProcedureStepSequence);
+						// get the DICOM step sequence
 						DicomSequence stepSequence = response.Dataset.GetSequence(DicomTag.ScheduledProcedureStepSequence);
-//						var responseModality = stepSequence.Items[0].GetSingleValueOrDefault(DicomTag.Modality, string.Empty);
 						var responseModality = "";
+						var dmwlStepList = new List<DMWLStepResult>();
 						foreach (var step in stepSequence.Items) {
 							responseModality += $",{step.GetSingleValueOrDefault(DicomTag.Modality, string.Empty)}";
+							DateTime? scheduledProcedureStudyDateTime = ConvertDtToDateTime($"{step.GetSingleValueOrDefault(DicomTag.ScheduledProcedureStepStartDate, string.Empty)}{step.GetSingleValueOrDefault(DicomTag.ScheduledProcedureStepStartTime, string.Empty).Split('.')[0]}");
+							dmwlStepList.Add(new DMWLStepResult(
+								step.GetSingleValueOrDefault(DicomTag.ScheduledProcedureStepID, string.Empty),
+								step.GetSingleValueOrDefault(DicomTag.Modality, string.Empty),
+								step.GetSingleValueOrDefault(DicomTag.ScheduledPerformingPhysicianName, string.Empty),
+								scheduledProcedureStudyDateTime,
+								step.GetSingleValueOrDefault(DicomTag.ScheduledProcedureStepDescription, string.Empty)
+								)
+							);
 						}
 						responseModality = responseModality.Substring(1);
-						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, stepSequence.Items.Count.ToString(), responseModality, responseAccessionNumber, responseRequestedProcedureDescription));
+						cFindResultList.Add(new SendDMWLQueryResult(responsePatientName, responsePatientID, responsePatientDOB, responsePatientSex, stepSequence.Items.Count.ToString(), responseModality, responseAccessionNumber, responseRequestedProcedureDescription, dmwlStepList));
 					}
 				};
 
