@@ -93,21 +93,6 @@ namespace DicomTools {
 			Position = 5,
 			HelpMessage = "The station AE title"
 		)]
-		public string StationAETitle {
-			get { return this.stationAETitle; }
-			set { this.stationAETitle = value; }
-		}
-
-		// The Station Name
-		[Parameter(
-			Mandatory = false,
-			Position = 6,
-			HelpMessage = "The station AE title"
-		)]
-		public string StationName {
-			get { return this.stationName; }
-			set { this.stationName = value; }
-		}
 
 		// Constrain results to specific modalities
 		[Parameter(
