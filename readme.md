@@ -3,6 +3,7 @@ This PowerShell module is a small collection of CmdLets to test DICOM interfaces
 
 * __Send-CEcho__: send a DICOM C-ECHO to a DICOM endpoint.
 * __Send-CFind__: send a DICOM C-Find request to a DICOM endpoint, display the results returned.
+* __Send-DWMLQuery__: query a DICOM Modality Worklist (experimental - may not be reliable)
 * __Get-DicomTag__: list the DICOM tags from a DICOM file.
 
 
@@ -149,6 +150,57 @@ PatientName PatientID BirthDate Sex Modality StudyDate            AccessionNumbe
 ----------- --------- --------- --- -------- ---------            --------------- ---------------
 Tester^Test 12345     19850202  M   ES       2/07/2021 2:10:58 PM 7654321         1.2.826.0.1.3680043.2.891.113.20210702141058064482710
 ```
+
+## Send-DWMLQuery
+Send a C-FIND query to a DICOM interface, display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters.
+
+Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
+
+```Powershell
+Send-DMWLQuery [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [[-Modality] <string>] [[-ScheduledDateTime] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+```
+
+### Parameters
+__-HostName <string>__ The hostname of the DICOM interface to query.
+
+__-Port <int>__ The TCP port number of the DICOM interface.
+
+__-LocalAETitle <string>__  The caller AE title. Defaults to 'DICOMTOOLS-SCU' if no parameter supplied.
+
+__-RemoteAETitle <string>__ The called AE title. Defaults to 'ANY-SCP' if no parameter supplied.
+
+__-Modality <string>__ Constrain the search to a modality type. [NOT YET IMPLEMENTED]
+
+__-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
+
+__-Timeout <int>__ The timout in seconds before the DICOM association is cancelled (or time to wait for a response to the C-FIND if association was successful).
+
+### Examples
+Query DICOM modality worklist
+```
+Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112
+
+PatientName           PatientID BirthDate Sex Steps Modality  AccessionNumber StudyDescription  ProcedureSteps
+-----------           --------- --------- --- ----- --------  --------------- ----------------  --------------
+Bowen^William^^Dr     PAT004    19560807  M   1     MR        125             CT Left Shoulder  {1}
+Bloggs^Joe^^Mr        PAT001    19450703  M   1     CT        123             CT Brain          {1}
+Williams^Jane^^Mrs    PAT002    19830806  F   1     MR        124             MRI Left Shoulder {1}
+Smith^Emma^^Miss      PAT003    19480603  F   1     RF        126             Left Leg DSA      {1}
+Bowen^William^^Dr     PAT004    19560807  M   1     CT        125             MRI Left Shoulder {1}
+Bowen^William^^Dr     PAT004    19560807  M   1     US        125             US Left Shoulder  {1}
+```
+
+Query DICOM modality worklist procedure steps for the 3rd result returned
+```
+(Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112)[2].procedureSteps
+
+StepID              : 1
+Modality            : MR
+PerformingPhysician : Evans^^^Dr
+StepDateTime        : 1/01/2001 12:30:00 PM
+StepDescription     : MRI Left Shoulder
+```
+
 
 
 ## Get-DicomTag
