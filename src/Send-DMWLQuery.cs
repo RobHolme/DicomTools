@@ -87,13 +87,6 @@ namespace DicomTools {
 			set { this.calledDicomAeTitle = value; }
 		}
 
-		// The Station AE title
-		[Parameter(
-			Mandatory = false,
-			Position = 5,
-			HelpMessage = "The station AE title"
-		)]
-
 		// Constrain results to specific modalities
 		[Parameter(
 			Mandatory = false,

@@ -12,7 +12,6 @@ namespace DicomTools {
 		private string patientBirthDate;
 		private string patientSex;
 		private string modality;
-		private DateTime? studyDate;
 		private string accessionNumber;
 		private string studyDescription;
 		private string stepCount;
@@ -68,14 +67,6 @@ namespace DicomTools {
 		}
 
 		/// <summary>
-		/// The date the study was acquired
-		/// </summary>
-		public DateTime? StudyDate {
-			get { return studyDate; }
-			set { this.studyDate = value; }
-		}
-
-		/// <summary>
 		/// The study AccessionNumber
 		/// </summary>
 		public string AccessionNumber {
@@ -112,7 +103,6 @@ namespace DicomTools {
 			this.modality = Modality;
 			this.studyDescription = StudyDescription;
 			this.accessionNumber = AccessionNumber;
-			this.studyDate = StudyDate;
 			this.procedureSteps = ProcedureSteps;
 
 		}
