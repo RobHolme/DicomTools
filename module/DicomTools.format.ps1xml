@@ -152,6 +152,77 @@
 		</TableControl>
 	</View>
 
+<View> 
+		<Name>SendDMWLQueryResult</Name>
+		<ViewSelectedBy>
+			<TypeName>DicomTools.SendDMWLQueryResult</TypeName>
+		</ViewSelectedBy>
+		<TableControl>
+			<TableHeaders>
+				<TableColumnHeader>
+					<Label>PatientName</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>PatientID</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>BirthDate</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Sex</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Steps</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Modality</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>AccessionNumber</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>StudyDescription</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>ProcedureSteps</Label>
+				</TableColumnHeader>
+			</TableHeaders>
+			<TableRowEntries>
+				<TableRowEntry>
+					<TableColumnItems>
+						<TableColumnItem>
+							<PropertyName>PatientName</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>PatientID</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>BirthDate</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Sex</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Steps</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Modality</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>AccessionNumber</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>StudyDescription</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>ProcedureSteps</PropertyName>
+						</TableColumnItem>
+					</TableColumnItems>
+				</TableRowEntry>
+			</TableRowEntries>
+		</TableControl>
+	</View>
+
 
 </ViewDefinitions>
 </Configuration>
