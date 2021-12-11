@@ -15,3 +15,4 @@
 * 1.2.8 - Incremented module version to fix publishing error on PSGallery
 * 1.2.9 - Added alias 'CallingAETitle' to LocalAETitle parameter. Added alias 'CalledAETitle' to RemoteAETitle parameter  (for both Send-CEcho and Send-CFind).
 * 1.3.0 - Added Send-DMWLQuery function to query DICOM Modality Worklists
+* 1.3.1 - Added additional search parameters for Send-DMWLQuery function
