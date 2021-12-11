@@ -25,14 +25,12 @@ namespace DicomTools {
 		private int dicomRemoteHostPort;
 		private string callingDicomAeTitle = "DICOMTOOLS-SCU";
 		private string calledDicomAeTitle = "ANY-SCP";
-		private string stationAETitle = null;
-		private string stationName = null;
 		private string patientName = null;
 		private string patientID = null;
 		private string modalityType = null;
-		private string scheduledDateTime = "";
-		private string scheduledStartDate = null;
-		private string scheduledStartTime = null;
+		private string studyScheduledStartString = null;
+		private string studyScheduledEndString = null;
+		private DicomDateRange scheduledDateTimeRange = null;
 		private bool useTls = false;
 		private bool abortProcessing = false;
 		private int timeoutInSeconds = 20;
@@ -87,10 +85,32 @@ namespace DicomTools {
 			set { this.calledDicomAeTitle = value; }
 		}
 
+		// Search for scheduled exams for specific patients
+		[Parameter(
+			Mandatory = false,
+			Position = 5,
+			HelpMessage = "Include studies scheduled for this Patient name"
+		)]
+		public string PatientName {
+			get { return this.patientName; }
+			set { this.patientName = value; }
+		}
+
+		// Search for scheduled exams for specific patients
+		[Parameter(
+			Mandatory = false,
+			Position = 6,
+			HelpMessage = "Include studies scheduled for this Patient ID"
+		)]
+		public string PatientID {
+			get { return this.patientID; }
+			set { this.patientID = value; }
+		}
+
 		// Constrain results to specific modalities
 		[Parameter(
 			Mandatory = false,
-			Position = 8,
+			Position = 7,
 			HelpMessage = "Constrain results to specific modalities"
 		)]
 		public string Modality {
@@ -98,15 +118,26 @@ namespace DicomTools {
 			set { this.modalityType = value; }
 		}
 
-		// Search for studies acquired on or after this date
+		// Search for studies scheduled on or after this date /time
+		[Parameter(
+			Mandatory = false,
+			Position = 8,
+			HelpMessage = "Include studies scheduled from or after this date (and time)"
+		)]
+		public string StartDateTime {
+			get { return this.studyScheduledStartString; }
+			set { this.studyScheduledStartString = value; }
+		}
+
+		// Search for studies acquired on or before this date
 		[Parameter(
 			Mandatory = false,
 			Position = 9,
-			HelpMessage = "Include studies scheduled for this date/time"
+			HelpMessage = "Include studies from or after this date YYYYMMDD"
 		)]
-		public string ScheduledDateTime {
-			get { return this.scheduledDateTime; }
-			set { this.scheduledDateTime = value; }
+		public string EndDateTime {
+			get { return this.studyScheduledEndString; }
+			set { this.studyScheduledEndString = value; }
 		}
 
 		// Use TLS for the connection
@@ -136,20 +167,46 @@ namespace DicomTools {
 		/// begin processing
 		/// </summary>
 		protected override void BeginProcessing() {
+			DateTime studyScheduledStartDateTime;
+			DateTime studyScheduledEndDateTime;
+
+			// the search is based on date range, so start and end times for the range must be included.  
+			if ((studyScheduledStartString != null) & (studyScheduledEndString == null)) {
+				WriteWarning($"The -EndDateTime parameter must be supplied with the -StartDateTime parameter");
+				abortProcessing = true;
+				return;
+			}
+			if ((studyScheduledEndString != null) & (studyScheduledStartString == null)) {
+				WriteWarning($"The -StartDateTime parameter must be supplied with the -EndDateTime parameter");
+				abortProcessing = true;
+				return;
+			}
 
 
 			// Convert the user date time values into a DateTime object. Use standard parser, warn if unable to parse. 
 			// Conversion is done here, instead of using a [DateTime] parameter to allow friendlier error reporting if value can;t be parsed as a DateTime value.
-			if (scheduledDateTime.Length > 0) {
+			if (studyScheduledStartString != null) {
 				try {
-					DateTime studyScheduledDateTimeStart = DateTime.Parse(scheduledDateTime);
-					scheduledStartDate = $"{studyScheduledDateTimeStart.Year}{studyScheduledDateTimeStart.Month.ToString().PadLeft(2, '0')}{studyScheduledDateTimeStart.Day.ToString().PadLeft(2, '0')}";
-					scheduledStartTime = $"{studyScheduledDateTimeStart.Hour.ToString().PadLeft(2, '0')}{studyScheduledDateTimeStart.Minute.ToString().PadLeft(2, '0')}{studyScheduledDateTimeStart.Second.ToString().PadLeft(2, '0')}";
+					studyScheduledStartDateTime = DateTime.Parse(studyScheduledStartString);
 				}
 				catch {
-					WriteWarning($"Unable to convert '{scheduledDateTime}' into a DateTime value for -StartDateTime.");
+					WriteWarning($"Unable to convert '{studyScheduledStartString}' into a DateTime value for -StartDateTime.");
 					abortProcessing = true;
 					return;
+				}
+
+				if (studyScheduledEndString != null) {
+					try {
+						studyScheduledEndDateTime = DateTime.Parse(studyScheduledEndString);
+					}
+					catch {
+						WriteWarning($"Unable to convert '{studyScheduledEndString}' into a DateTime value for -StartDateTime.");
+						abortProcessing = true;
+						return;
+					}
+
+					// create a date range object of start and end datetime parameters supplied
+					scheduledDateTimeRange = new DicomDateRange(studyScheduledStartDateTime, studyScheduledEndDateTime);
 				}
 			}
 		}
@@ -164,13 +221,19 @@ namespace DicomTools {
 			}
 
 			// write connection details if -Verbose switch supplied
-			WriteVerbose($"Hostname:              {dicomRemoteHost}");
-			WriteVerbose($"Port:                  {dicomRemoteHostPort}");
-			WriteVerbose($"Calling AE Title:      {callingDicomAeTitle}");
-			WriteVerbose($"Called AE Title:       {calledDicomAeTitle}");
-			WriteVerbose($"Use TLS:               {useTls}");
-			WriteVerbose($"Timeout:               {timeoutInSeconds}");
-
+			WriteVerbose($"Hostname:          {this.dicomRemoteHost}");
+			WriteVerbose($"Port:              {this.dicomRemoteHostPort}");
+			WriteVerbose($"Calling AE Title:  {this.callingDicomAeTitle}");
+			WriteVerbose($"Called AE Title:   {this.calledDicomAeTitle}");
+			WriteVerbose($"Use TLS:           {this.useTls}");
+			WriteVerbose($"Timeout:           {this.timeoutInSeconds}");
+			WriteVerbose("");
+			WriteVerbose("------Schedule Exam Search Parameters------");
+			WriteVerbose($"Patient Name:             {this.patientName}");
+			WriteVerbose($"Patient ID:               {this.patientID}");
+			WriteVerbose($"Scheduled Exam DateTime:  {this.scheduledDateTimeRange.ToString()}");
+			WriteVerbose($"Modality Type:            {this.modalityType}");
+			WriteVerbose("");
 			var verboseList = new List<string>();
 
 			try {
@@ -184,7 +247,14 @@ namespace DicomTools {
 				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
 				client.NegotiateAsyncOps();
 
-				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(); // no filter, return all results.
+
+				// no filter, return all results.
+				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(
+						patientName: this.PatientName,
+						patientId: this.PatientID,
+						modality: this.modalityType,
+						scheduledDateTime: scheduledDateTimeRange
+				);
 
 				// list to store the results returned
 				var cFindResultList = new List<SendDMWLQueryResult>();
