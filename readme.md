@@ -152,12 +152,14 @@ Tester^Test 12345     19850202  M   ES       2/07/2021 2:10:58 PM 7654321       
 ```
 
 ## Send-DWMLQuery
-Send a C-FIND query to a DICOM interface, display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters.
+Query a DICOM Modality Work List (DMWL), display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters. The default results will contain Patient details. The scheduled procedure steps can be accessed from the ProcedureSteps property returned. This is a list of all procedure steps for a given scheduled exam.
 
-Search by values provided in either PatientName, PatientID, or StudyID parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
+Restrict search by PatientName, PatientID, or Modality parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
+
+The StartDateTime and EndDateTime parameters can be supplied to constrain the search to exams scheduled between these dates. Both parameters must be supplied to create a date range. Any text value can be entered providing it can be recognised as a Date or DateTime value. e.g. "1997-09-18 20:00" or "18 Sept 97 8pm" would be accepted.
 
 ```Powershell
-Send-DMWLQuery [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [[-Modality] <string>] [[-ScheduledDateTime] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+Send-DMWLQuery [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [[-PatientName] <string>] [[-PatientID] <string>] [[-Modality] <string>] [[-StartDateTime] <string>] [[-EndDateTime] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
 ```
 
 ### Parameters
@@ -169,7 +171,15 @@ __-LocalAETitle <string>__  The caller AE title. Defaults to 'DICOMTOOLS-SCU' if
 
 __-RemoteAETitle <string>__ The called AE title. Defaults to 'ANY-SCP' if no parameter supplied.
 
-__-Modality <string>__ Constrain the search to a modality type. [NOT YET IMPLEMENTED]
+__-PatientName <string>__ Constrain the search to specific patient names (may be case sensitive - depends on PACS).
+
+__-PatientID <string>__ Constrain the search to specific patient IDs.
+
+__-Modality <string>__ Constrain the search to a modality type.
+
+__-StartDateTime <string>__ Constrain the search for studies scheduled on or after this DateTime. Must also supply the -EndDateTime parameter to create a date range. 
+
+__-EndDateTime <string>__ Constrain the search for studies scheduled on or before this DateTime. Must also supply the -StartDateTime parameter to create a date range. 
 
 __-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
 
@@ -178,7 +188,7 @@ __-Timeout <int>__ The timout in seconds before the DICOM association is cancell
 ### Examples
 Query DICOM modality worklist
 ```
-Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112
+PS> Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112
 
 PatientName           PatientID BirthDate Sex Steps Modality  AccessionNumber StudyDescription  ProcedureSteps
 -----------           --------- --------- --- ----- --------  --------------- ----------------  --------------
@@ -190,9 +200,9 @@ Bowen^William^^Dr     PAT004    19560807  M   1     CT        125             MR
 Bowen^William^^Dr     PAT004    19560807  M   1     US        125             US Left Shoulder  {1}
 ```
 
-Query DICOM modality worklist procedure steps for the 3rd result returned
+Query DICOM modality worklist, display the procedure steps for the 3rd result returned
 ```
-(Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112)[2].procedureSteps
+PS> (Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112)[2].procedureSteps
 
 StepID              : 1
 Modality            : MR
@@ -201,6 +211,16 @@ StepDateTime        : 1/01/2001 12:30:00 PM
 StepDescription     : MRI Left Shoulder
 ```
 
+Query patients with a scheduled CT exam between 4pm and 8pm on 18 September 1997
+```
+PS> Send-DMWLQuery  -HostName www.dicomserver.co.uk -Port 11112 -StartDateTime "Sept 18 1997 1pm" -EndDateTime "1997-09-18 20:00"  -Modality CT
+
+PatientName       PatientID BirthDate Sex Steps Modality AccessionNumber StudyDescription  ProcedureSteps
+-----------       --------- --------- --- ----- -------- --------------- ----------------  --------------
+Bowen^William^^Dr PAT004    19560807  M   1     MR       125             CT Left Shoulder  {1}
+Bloggs^Joe^^Mr    PAT001    19450703  M   1     CT       123             CT Brain          {1}
+Bowen^William^^Dr PAT004    19560807  M   1     CT       125             MRI Left Shoulder {1}
+```
 
 
 ## Get-DicomTag
