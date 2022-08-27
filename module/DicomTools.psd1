@@ -11,11 +11,11 @@
 # Script module or binary module file associated with this manifest.
 RootModule = if($PSEdition -eq 'Core')
 {
-    'lib\netstandard\DicomTools.dll'
+    'lib\netstandard\DICOMTools.dll'
 }
 else # Desktop
 {
-    'lib\netframework\DicomTools.dll'
+    'lib\netframework\DICOMTools.dll'
 }
 
 # Version number of this module.
