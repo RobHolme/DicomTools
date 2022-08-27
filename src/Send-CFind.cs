@@ -18,6 +18,7 @@ namespace DicomTools {
 	using FellowOakDicom;
 	using FellowOakDicom.Network;
 	using FellowOakDicom.Network.Client;
+	using FellowOakDicom.Log;
 
 	[Cmdlet(VerbsCommunications.Send, "CFind")]
 	public class SendCFind : PSCmdlet {
@@ -418,6 +419,10 @@ namespace DicomTools {
             client.ServiceOptions.LogDimseDatasets = false;
             client.ServiceOptions.LogDataPDUs = false;
 			client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeout);
+			// suppress console logging unless in debug mode 
+			if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
+				client.Logger = new NullLogger();
+			}
             return client;
         }
 	}
