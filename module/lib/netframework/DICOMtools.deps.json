@@ -11,7 +11,7 @@
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "PowerShellStandard.Library": "5.1.0",
-          "fo-dicom.NetCore": "4.0.7"
+          "fo-dicom.NetCore": "4.0.8"
         },
         "runtime": {
           "DICOMtools.dll": {}
@@ -40,7 +40,7 @@
           }
         }
       },
-      "fo-dicom.NetCore/4.0.7": {
+      "fo-dicom.NetCore/4.0.8": {
         "dependencies": {
           "CSJ2K": "3.0.0",
           "NETStandard.Library": "2.0.3",
@@ -56,8 +56,8 @@
         },
         "runtime": {
           "lib/netstandard1.3/Dicom.Core.dll": {
-            "assemblyVersion": "4.0.7.0",
-            "fileVersion": "4.0.7.0"
+            "assemblyVersion": "4.0.8.0",
+            "fileVersion": "4.0.8.0"
           }
         }
       },
@@ -951,12 +951,12 @@
       "path": "csj2k/3.0.0",
       "hashPath": "csj2k.3.0.0.nupkg.sha512"
     },
-    "fo-dicom.NetCore/4.0.7": {
+    "fo-dicom.NetCore/4.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-//Uvwad6QEaxTdxQbIU9NdPyb2ruSa5uSs3UhwCUKTwGGx8dSzlQ8jnYHUCmbKkaa+tzeBaX3CotxGm9O6T7dw==",
-      "path": "fo-dicom.netcore/4.0.7",
-      "hashPath": "fo-dicom.netcore.4.0.7.nupkg.sha512"
+      "sha512": "sha512-SMKmwe7A7zT6Pmrht+unjTX4rnpcSX8FOzrZl7gVBOHmELvCHc+t48JgM28CM9P6ieUyNAxgu2UPfn6eUwftwQ==",
+      "path": "fo-dicom.netcore/4.0.8",
+      "hashPath": "fo-dicom.netcore.4.0.8.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
