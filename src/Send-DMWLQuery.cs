@@ -206,7 +206,9 @@ namespace DicomTools {
 					}
 
 					// create a date range object of start and end datetime parameters supplied
-					scheduledDateTimeRange = new DicomDateRange(studyScheduledStartDateTime, studyScheduledEndDateTime);
+					if ((studyScheduledStartDateTime != null) & (studyScheduledEndDateTime != null)) {
+						scheduledDateTimeRange = new DicomDateRange(studyScheduledStartDateTime, studyScheduledEndDateTime);
+					}
 				}
 			}
 		}
@@ -231,7 +233,12 @@ namespace DicomTools {
 			WriteVerbose("------Schedule Exam Search Parameters------");
 			WriteVerbose($"Patient Name:             {this.patientName}");
 			WriteVerbose($"Patient ID:               {this.patientID}");
-			WriteVerbose($"Scheduled Exam DateTime:  {this.scheduledDateTimeRange.ToString()}");
+			if (scheduledDateTimeRange != null) {
+				WriteVerbose($"Scheduled Exam DateTime:  {this.scheduledDateTimeRange.ToString()}");
+			}
+			else {
+				WriteVerbose($"Scheduled Exam DateTime:");
+			}
 			WriteVerbose($"Modality Type:            {this.modalityType}");
 			WriteVerbose("");
 			var verboseList = new List<string>();
