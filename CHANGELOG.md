@@ -16,3 +16,5 @@
 * 1.2.9 - Added alias 'CallingAETitle' to LocalAETitle parameter. Added alias 'CalledAETitle' to RemoteAETitle parameter  (for both Send-CEcho and Send-CFind).
 * 1.3.0 - Added Send-DMWLQuery function to query DICOM Modality Worklists
 * 1.3.1 - Added additional search parameters for Send-DMWLQuery function
+* 1.3.2 - Using .net 4.8 for .net Framework targets. 
+        - Fixed issue in send-dmwlquery where date range is not supplied. 
