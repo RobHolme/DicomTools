@@ -15,8 +15,9 @@ namespace DicomTools {
 	using System.Management.Automation;
 	using System.Text.RegularExpressions;
 	using System.Threading;
-	using Dicom;
-	using Dicom.Network;
+	using FellowOakDicom;
+	using FellowOakDicom.Network;
+	using FellowOakDicom.Network.Client;
 
 	[Cmdlet(VerbsCommunications.Send, "CFind")]
 	public class SendCFind : PSCmdlet {
@@ -255,9 +256,7 @@ namespace DicomTools {
 				CancellationToken cancelToken = sourceCancelToken.Token;
 
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
-				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
-				client.Options = new Dicom.Network.DicomServiceOptions();
-				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
+				var client = CreateClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle, timeoutInSeconds);
 				client.NegotiateAsyncOps();
 				var cFindRequest = new DicomCFindRequest(DicomQueryRetrieveLevel.Study);
 
@@ -411,5 +410,15 @@ namespace DicomTools {
 				return null;
 			}
 		}
+		
+		// create a new DICOM client, set default options
+		private IDicomClient CreateClient(string host, int port, bool useTls, string callingAe, string calledAe, int timeout)
+        {
+            var client = DicomClientFactory.Create(host, port, useTls, callingAe, calledAe);
+            client.ServiceOptions.LogDimseDatasets = false;
+            client.ServiceOptions.LogDataPDUs = false;
+			client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeout);
+            return client;
+        }
 	}
 }
