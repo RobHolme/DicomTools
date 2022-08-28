@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'lib\DicomTools.dll'
+RootModule = '\lib\DICOMtools.dll'
 
 # Version number of this module.
 ModuleVersion = '1.4.0'
