@@ -1,4 +1,7 @@
 # Project Description
+
+>Note: This module supports Powershell Core (v7+) only, Windows Powershell (v5.1) is not supported.
+
 This PowerShell module is a small collection of CmdLets to test DICOM interfaces:
 
 * __Send-CEcho__: send a DICOM C-ECHO to a DICOM endpoint.
@@ -12,15 +15,16 @@ This module uses the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-
 # Installation 
 Either build the solution (instructions below), or download the latest release from https://github.com/RobHolme/DicomTools/releases. 
 
-Copy the contents of the /module folder (or extract the files from the release) to a folder named 'DicomTools' in the Powershell module path (use $env:PSModulePath to list all paths). 
+Copy the contents of the /module folder (or extract the files from the downloaded release) to a folder named 'DicomTools' in the Powershell module path (use $env:PSModulePath to list all paths). 
 
-Supports Windows Powershell 5.x and Microsoft PowerShell 7+.
+Supports Microsoft PowerShell 7+ only.
 ## Build instructions
 Install the .Net Core 3.1 SDK (https://dotnet.microsoft.com/download/visual-studio-sdks). 
 
-Edit the SDK version in global.json (if later than 3.1.412). 
+Edit the SDK version in global.json to match the build of the SDK installed. 
 
-Run ```dotnet build --configuration Release```
+Run ```.\publish.cmd```
+
 
 
 # CmdLet Usage 
