@@ -1,6 +1,6 @@
 # Project Description
 
->Note: This module supports Powershell Core (v7+) only, Windows Powershell (v5.1) is not supported.
+>Note: This module supports Powershell Core (v7+) only, Windows Powershell (v5.1) is no longer supported. Mostly tested under Powershell v7.x on Windows, but should work with PowerShell v7+ on Linux and MacOS.
 
 This PowerShell module is a small collection of CmdLets to test DICOM interfaces:
 
