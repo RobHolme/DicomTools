@@ -15,8 +15,10 @@ namespace DicomTools {
 	using System.Management.Automation;
 	using System.Text.RegularExpressions;
 	using System.Threading;
-	using Dicom;
-	using Dicom.Network;
+	using FellowOakDicom;
+	using FellowOakDicom.Network;
+	using FellowOakDicom.Network.Client;
+	using FellowOakDicom.Log;
 
 	[Cmdlet(VerbsCommunications.Send, "DMWLQuery")]
 	public class SendDMWLQuery : PSCmdlet {
@@ -249,11 +251,15 @@ namespace DicomTools {
 				CancellationToken cancelToken = sourceCancelToken.Token;
 
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
-				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
-				client.Options = new Dicom.Network.DicomServiceOptions();
-				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
+				var client = DicomClientFactory.Create(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
+				client.ServiceOptions.LogDimseDatasets = false;
+				client.ServiceOptions.LogDataPDUs = false;
+				client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
+				// suppress console logging unless in debug mode 
+				if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
+					client.Logger = new NullLogger();
+				}
 				client.NegotiateAsyncOps();
-
 
 				// no filter, return all results.
 				var cFindRequest = DicomCFindRequest.CreateWorklistQuery(

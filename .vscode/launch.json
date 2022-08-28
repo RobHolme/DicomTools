@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "PowerShell cmdlets: pwsh",
+			"name": "PowerShell cmdlets: pwsh.exe",
 			"type": "coreclr",
 			"request": "launch",
 			"program": "pwsh",

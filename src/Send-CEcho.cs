@@ -15,7 +15,9 @@ namespace DicomTools {
 	using System.Threading;
 	using System.Diagnostics;
 	using System.Management.Automation;
-	using Dicom.Network;
+	using FellowOakDicom.Network;
+	using FellowOakDicom.Network.Client;
+	using FellowOakDicom.Log;
 
 	[Cmdlet(VerbsCommunications.Send, "CEcho")]
 	public class SendCEcho : PSCmdlet {
@@ -121,11 +123,15 @@ namespace DicomTools {
 				CancellationToken cancelToken = sourceCancelToken.Token;
 
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
-				var client = new Dicom.Network.Client.DicomClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
-				client.Options = new Dicom.Network.DicomServiceOptions();
-				client.Options.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
+				var client = DicomClientFactory.Create(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
+				client.ServiceOptions.LogDimseDatasets = false;
+				client.ServiceOptions.LogDataPDUs = false;
+				client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
+				// suppress console logging unless in debug mode 
+				if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
+					client.Logger = new NullLogger();
+				}
 				var cEchoRequest = new DicomCEchoRequest();
-
 
 				// event handler - response received from C-ECHO request
 				cEchoRequest.OnResponseReceived += (request, response) => {
@@ -182,5 +188,6 @@ namespace DicomTools {
 				WriteDebug($"Exception: -> {e}");
 			}
 		}
+
 	}
 }

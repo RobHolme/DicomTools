@@ -18,7 +18,7 @@ namespace DicomTools {
 	using System.Management.Automation;
 	using Microsoft.PowerShell.Commands;
 	using System.Collections.Generic;
-	using Dicom;
+	using FellowOakDicom;
 
 	// CmdLet: Get-DicomTag
 	// Returns all DICOM tags from a DICOM file
