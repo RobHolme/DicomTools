@@ -123,7 +123,14 @@ namespace DicomTools {
 				CancellationToken cancelToken = sourceCancelToken.Token;
 
 				// create new DICOM client. Set timeout option based on -Timeout parameter use provides (defaults to 5 secs)
-				var client = CreateClient(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle, timeoutInSeconds);
+				var client = DicomClientFactory.Create(dicomRemoteHost, dicomRemoteHostPort, useTls, callingDicomAeTitle, calledDicomAeTitle);
+				client.ServiceOptions.LogDimseDatasets = false;
+				client.ServiceOptions.LogDataPDUs = false;
+				client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
+				// suppress console logging unless in debug mode 
+				if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
+					client.Logger = new NullLogger();
+				}
 				var cEchoRequest = new DicomCEchoRequest();
 
 				// event handler - response received from C-ECHO request
@@ -181,20 +188,6 @@ namespace DicomTools {
 				WriteDebug($"Exception: -> {e}");
 			}
 		}
-
-		// create a new DICOM client, set default options
-		private IDicomClient CreateClient(string host, int port, bool useTls, string callingAe, string calledAe, int timeout)
-        {
-            var client = DicomClientFactory.Create(host, port, useTls, callingAe, calledAe);
-            client.ServiceOptions.LogDimseDatasets = false;
-            client.ServiceOptions.LogDataPDUs = false;
-			client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeout);
-			// suppress console logging unless in debug mode 
-			if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
-				client.Logger = new NullLogger();
-			}
-            return client;
-        }
 
 	}
 }
