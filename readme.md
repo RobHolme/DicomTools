@@ -23,7 +23,7 @@ Install the .Net Core 6 SDK (https://dotnet.microsoft.com/download/visual-studio
 
 Run ```.\publish.cmd```
 
-
+The build module will be copied to the /Module folder.
 
 # CmdLet Usage 
 
