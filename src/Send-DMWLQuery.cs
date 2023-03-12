@@ -206,11 +206,9 @@ namespace DicomTools {
 						abortProcessing = true;
 						return;
 					}
-
+					
 					// create a date range object of start and end datetime parameters supplied
-					if ((studyScheduledStartDateTime != null) & (studyScheduledEndDateTime != null)) {
-						scheduledDateTimeRange = new DicomDateRange(studyScheduledStartDateTime, studyScheduledEndDateTime);
-					}
+					scheduledDateTimeRange = new DicomDateRange(studyScheduledStartDateTime, studyScheduledEndDateTime);
 				}
 			}
 		}
