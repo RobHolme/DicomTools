@@ -19,9 +19,7 @@ Copy the contents of the /module folder (or extract the files from the downloade
 
 Supports Microsoft PowerShell 7+ only.
 ## Build instructions
-Install the .Net Core 3.1 SDK (https://dotnet.microsoft.com/download/visual-studio-sdks). 
-
-Edit the SDK version in global.json to match the build of the SDK installed. 
+Install the .Net Core 6 SDK (https://dotnet.microsoft.com/download/visual-studio-sdks). 
 
 Run ```.\publish.cmd```
 
