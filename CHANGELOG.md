@@ -17,4 +17,6 @@
 * 1.3.0 - Added Send-DMWLQuery function to query DICOM Modality Worklists
 * 1.3.1 - Added additional search parameters for Send-DMWLQuery function
 * 1.3.2 - Using .net 4.8 for .net Framework targets. 
-        - Fixed issue in send-dmwlquery where date range is not supplied. 
+        - Fixed issue in send-dmwlquery where date range is not supplied.
+* 1.4.0 - Removed support for .Net Framework. Only .Net Core is now supported (PowerShell v6+)          
+* 1.4.1 - Moved to .Net 6.0. No functional changes. 
