@@ -128,9 +128,9 @@ namespace DicomTools {
 				client.ServiceOptions.LogDataPDUs = false;
 				client.ServiceOptions.RequestTimeout = new TimeSpan(0, 0, timeoutInSeconds);
 				// suppress console logging unless in debug mode 
-				if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
-					client.Logger = new NullLogger();
-				}
+//				if (!this.MyInvocation.BoundParameters.ContainsKey("Debug")) {
+//					client.Logger = new NullLogger();
+//				}
 				var cEchoRequest = new DicomCEchoRequest();
 
 				// event handler - response received from C-ECHO request
