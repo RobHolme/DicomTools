@@ -12,7 +12,7 @@
 RootModule = '.\lib\DICOMtools.dll'
 
 # Version number of this module.
-ModuleVersion = '1.4.1'
+ModuleVersion = '1.4.2'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Core')
@@ -27,7 +27,7 @@ Author = 'Rob Holme (rob@holme.com.au)'
 CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2021 Rob Holme. All rights reserved.'
+Copyright = '(c) 2023 Rob Holme. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Powershell module for DICOM testing. Uses fo-dicom library'
