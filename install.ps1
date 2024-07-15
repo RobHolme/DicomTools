@@ -164,7 +164,7 @@ cd module
 
 # Prompt user to select modile if "PromptForModulePath" provided as the -Scope parameter, otherwise use AllUsers or CurrentUser path based on the parameter 
 # Note: -Scope defaults to CurrentUser if no paramter value provided. 
-if($scope = "PromptForModulePath") {
+if($scope -eq "PromptForModulePath") {
     $moduleRootPath = Select-PSModulePath
 }
 else {
