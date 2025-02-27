@@ -27,7 +27,7 @@ Author = 'Rob Holme (rob@holme.com.au)'
 CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2023 Rob Holme. All rights reserved.'
+Copyright = '(c) 2021-2025 Rob Holme. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Powershell module for DICOM testing. Uses fo-dicom library'
