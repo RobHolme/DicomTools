@@ -1,0 +1,23 @@
+name: Build solution on push
+
+on:
+  # triggered on push to main branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  # manual trigger   
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      # checkout repo
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # build .Net Core solution
+      - name: Build .net core 6.0 solution
+        run: dotnet publish --configuration release --output .\module\lib\
