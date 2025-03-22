@@ -20,4 +20,4 @@ jobs:
 
       # build .Net Core solution
       - name: Build .net core 6.0 solution
-        run: dotnet publish --configuration release --output .\module\lib\
+        run: dotnet publish --configuration release --framework net6.0 --output .\module\lib\
