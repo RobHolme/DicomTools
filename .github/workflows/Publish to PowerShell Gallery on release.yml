@@ -1,0 +1,31 @@
+name: Publish release to PowerShell Gallery
+
+
+on:
+  # triggered on new release (ignores draft releases)
+  release:
+    types: [published]
+  # manual trigger  
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      # checkout repo
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # build .Net Core solution
+      - name: Build .net core 6.0 solution
+        run: dotnet publish --configuration release --framework net6.0 --output .\module\lib\
+
+      # publish to powershellgallery.com
+      # secrets.PS_GALLERY_KEY is the API key for the PowerShell Gallery.
+      # The key may need updating in the secrets section of the repository settings if expired.
+      - name: Publish module 
+        env:
+          NUGET_KEY: ${{ secrets.PS_GALLERY_KEY }}
+        shell: pwsh
+        run: Publish-Module -path .\module -NuGetApiKey $env:NUGET_KEY -Verbose
