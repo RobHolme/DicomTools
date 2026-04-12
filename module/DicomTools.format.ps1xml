@@ -224,5 +224,113 @@
 	</View>
 
 
+	<View>
+		<Name>SendCGetResult</Name>
+		<ViewSelectedBy>
+			<TypeName>DicomTools.SendCGetResult</TypeName>
+		</ViewSelectedBy>
+		<TableControl>
+			<TableHeaders>
+				<TableColumnHeader>
+					<Label>SOPInstanceUID</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>SOPClassUID</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>FilePath</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Status</Label>
+				</TableColumnHeader>
+			</TableHeaders>
+			<TableRowEntries>
+				<TableRowEntry>
+					<TableColumnItems>
+						<TableColumnItem>
+							<PropertyName>SOPInstanceUID</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>SOPClassUID</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>FilePath</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<ScriptBlock>
+								if ($_.Status -ne "Success") {
+                      				"$([char]0x1b)[1;91m$($_.Status)$([char]0x1b)[0m"
+                  				}
+                  				else {
+                      				$_.Status
+                  				}
+							</ScriptBlock>
+						</TableColumnItem>
+					</TableColumnItems>
+				</TableRowEntry>
+			</TableRowEntries>
+		</TableControl>
+	</View>
+
+	<View>
+		<Name>SendCMoveResult</Name>
+		<ViewSelectedBy>
+			<TypeName>DicomTools.SendCMoveResult</TypeName>
+		</ViewSelectedBy>
+		<TableControl>
+			<TableHeaders>
+				<TableColumnHeader>
+					<Label>MoveDestination</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Status</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Completed</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Failed</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Warning</Label>
+				</TableColumnHeader>
+				<TableColumnHeader>
+					<Label>Remaining</Label>
+				</TableColumnHeader>
+			</TableHeaders>
+			<TableRowEntries>
+				<TableRowEntry>
+					<TableColumnItems>
+						<TableColumnItem>
+							<PropertyName>MoveDestination</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<ScriptBlock>
+								if ($_.Status -ne "Success") {
+                      				"$([char]0x1b)[1;91m$($_.Status)$([char]0x1b)[0m"
+                  				}
+                  				else {
+                      				$_.Status
+                  				}
+							</ScriptBlock>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Completed</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Failed</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Warning</PropertyName>
+						</TableColumnItem>
+						<TableColumnItem>
+							<PropertyName>Remaining</PropertyName>
+						</TableColumnItem>
+					</TableColumnItems>
+				</TableRowEntry>
+			</TableRowEntries>
+		</TableControl>
+	</View>
+
 </ViewDefinitions>
 </Configuration>

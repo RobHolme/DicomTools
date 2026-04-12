@@ -72,7 +72,7 @@ FormatsToProcess = @('DicomTools.format.ps1xml')
 FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = @('Send-CEcho','Get-DicomTag','Send-CFind', 'Send-DMWLQuery')
+CmdletsToExport = @('Send-CEcho','Get-DicomTag','Send-CFind', 'Send-DMWLQuery', 'Send-CGet', 'Send-CMove')
 
 # Variables to export from this module
 VariablesToExport = @()
