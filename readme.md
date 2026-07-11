@@ -8,7 +8,8 @@ This PowerShell module is a small collection of CmdLets to test DICOM interfaces
 * __Send-CFind__: send a DICOM C-Find request to a DICOM endpoint, display the results returned.
 * __Send-DWMLQuery__: query a DICOM Modality Worklist (experimental - may not be reliable)
 * __Get-DicomTag__: list the DICOM tags from a DICOM file.
-* __Send-CMove__: send the DICOM images to the target AE
+* __Send-CMove__: send the DICOM images to the target AE.
+* __Send-CGet__: send a DICOM C-GET to retrieve images from a remote host.
 
 
 This module uses the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-dicom/fo-dicom
@@ -260,6 +261,38 @@ __-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM s
 
 __-Timeout <int>__ The timout in seconds before the DICOM association is cancelled (or time to wait for a response to the C-FIND if association was successful).
 
+
+## Send-CGet
+Send a DICOM C-GET to retrieve images from a remote host.
+
+```Powershell
+    Send-CGet [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-StudyInstanceUID] <string> [[-OutputDirectory] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+
+    Send-CGet [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-SeriesInstanceUID] <string> [[-OutputDirectory] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+
+    Send-CGet [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-SOPInstanceUID] <string> [[-OutputDirectory] <string>] [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+```
+
+### Parameters
+__-HostName <string>__ The hostname of the DICOM interface to query.
+
+__-Port <int>__ The TCP port number of the DICOM interface.
+
+__-LocalAETitle <string>__  The caller AE title. Defaults to 'DICOMTOOLS-SCU' if no parameter supplied.
+
+__-RemoteAETitle <string>__ The called AE title. Defaults to 'ANY-SCP' if no parameter supplied.
+
+__-OutputDirectory <string>__ The directory to save the DICOM file to.
+
+__-StudyInstanceUID <string>__ The Study Instance UID to retrieve.
+
+__-SeriesInstanceUID <string>__ The Series Instance UID to retrieve.
+
+__-SOPInstanceUID <string>__ The SOP Instance UID to retrieve.
+
+__-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
+
+__-Timeout <int>__ The timout in seconds before the DICOM association is cancelled (or time to wait for a response to the C-FIND if association was successful).
 
 ## Get-DicomTag
 Displays the DICOM tags from a DICOM file. 
