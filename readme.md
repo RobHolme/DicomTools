@@ -225,23 +225,6 @@ Bloggs^Joe^^Mr    PAT001    19450703  M   1     CT       123             CT Brai
 Bowen^William^^Dr PAT004    19560807  M   1     CT       125             MRI Left Shoulder {1}
 ```
 
-
-## Get-DicomTag
-Displays the DICOM tags from a DICOM file. 
-
-```Powershell
-Get-DicomTag -LiteralPath <string[]> [<CommonParameters>]
-
-Get-DicomTag [-Path] <string[]> [<CommonParameters>]
-```
-
-### Parameters
-__-LiteralPath <string>__ The literal path to the DICOM file.
-
-__-Path <string>__ The path of the DICOM file(s). Can include wildcards or regular expressions to specify multiple files.  
-
-
-
 ## Send-CMove
 Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.
 
