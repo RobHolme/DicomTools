@@ -49,11 +49,6 @@ Send-CFind [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-Remo
  [-UseTLS] [[-Timeout] <int>] [<CommonParameters>]
 ```
 
-## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
-
 ## DESCRIPTION
 
 Send a C-FIND query to a DICOM interface, display the results returned.
@@ -415,15 +410,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## INPUTS
-
-### System.String
-
-{{ Fill in the Description }}
-
-## OUTPUTS
-
-## NOTES
 
 ## RELATED LINKS
 

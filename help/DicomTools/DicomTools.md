@@ -12,9 +12,10 @@ title: DicomTools Module
 
 # DicomTools Module
 
+
 ## Description
 
-Powershell module for DICOM testing. Uses fo-dicom library
+Small collection of powershell commands to test DICOM interfaces. Uses Fellow OAK DICOM (fo-dicom) library.
 
 ## DicomTools
 
@@ -32,13 +33,13 @@ Send a C-FIND query to a DICOM interface, display the results returned.
 
 ### [Send-CGet](Send-CGet.md)
 
-{{ Fill in the Synopsis }}
+Send a DICOM C-GET to retrieve images from a remote host. Save to local directory.
 
 ### [Send-CMove](Send-CMove.md)
 
-{{ Fill in the Synopsis }}
+Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.
 
 ### [Send-DMWLQuery](Send-DMWLQuery.md)
 
-{{ Fill in the Synopsis }}
+Query a DICOM Modality Work List (DMWL), display the results returned. 
 

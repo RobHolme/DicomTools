@@ -24,15 +24,10 @@ Send-CEcho [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-Remo
  [-UseTLS] [[-Timeout] <int>] [<CommonParameters>]
 ```
 
-## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
-
 ## DESCRIPTION
 
 Sends a DICOM C-Echo to a DICOM endpoint.
-Reteurn the response, and time taken to respond (If successfull).
+Return the response, and time taken to respond (If successful).
 
 ## EXAMPLES
 
@@ -181,16 +176,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
 -ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
-
-## INPUTS
-
-### System.String
-
-{{ Fill in the Description }}
-
-## OUTPUTS
-
-## NOTES
 
 ## RELATED LINKS
 

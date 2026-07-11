@@ -13,7 +13,7 @@ title: Send-DMWLQuery
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Query a DICOM Modality Work List (DMWL), display the results returned.
 
 ## SYNTAX
 
@@ -33,13 +33,53 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-{{ Fill in the Description }}
+Query a DICOM Modality Work List (DMWL), display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters. The default results will contain Patient details, to access scheduled procedure steps expand the 'ProcedureSteps' property returned. 
+
+Restrict search by PatientName, PatientID, or Modality parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.
+
+The StartDateTime and EndDateTime parameters can be supplied to constrain the search to exams scheduled between these dates. Both parameters must be supplied to create a date range. Any text value can be entered providing it can be recognised as a Date or DateTime value. e.g. "1997-09-18 20:00" or "18 Sept 97 8pm" would be accepted.
 
 ## EXAMPLES
 
 ### Example 1
 
-{{ Add example description here }}
+Query DICOM modality worklist:
+
+PS> Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112
+
+PatientName           PatientID BirthDate Sex Steps Modality  AccessionNumber StudyDescription  ProcedureSteps
+-----------           --------- --------- --- ----- --------  --------------- ----------------  --------------
+Bowen^William^^Dr     PAT004    19560807  M   1     MR        125             CT Left Shoulder  {1}
+Bloggs^Joe^^Mr        PAT001    19450703  M   1     CT        123             CT Brain          {1}
+Williams^Jane^^Mrs    PAT002    19830806  F   1     MR        124             MRI Left Shoulder {1}
+Smith^Emma^^Miss      PAT003    19480603  F   1     RF        126             Left Leg DSA      {1}
+Bowen^William^^Dr     PAT004    19560807  M   1     CT        125             MRI Left Shoulder {1}
+Bowen^William^^Dr     PAT004    19560807  M   1     US        125             US Left Shoulder  {1}
+
+### Example 2
+
+Query DICOM modality worklist, display the procedure steps for the 3rd result returned:
+
+PS> (Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112)[2].procedureSteps
+
+StepID              : 1
+Modality            : MR
+PerformingPhysician : Evans^^^Dr
+StepDateTime        : 1/01/2001 12:30:00 PM
+StepDescription     : MRI Left Shoulder
+
+### Example 3
+
+Query patients with a scheduled CT exam between 4pm and 8pm on 18 September 1997:
+
+PS> Send-DMWLQuery  -HostName www.dicomserver.co.uk -Port 11112 -StartDateTime "Sept 18 1997 1pm" -EndDateTime "1997-09-18 20:00"  -Modality CT
+
+PatientName       PatientID BirthDate Sex Steps Modality AccessionNumber StudyDescription  ProcedureSteps
+-----------       --------- --------- --- ----- -------- --------------- ----------------  --------------
+Bowen^William^^Dr PAT004    19560807  M   1     MR       125             CT Left Shoulder  {1}
+Bloggs^Joe^^Mr    PAT001    19450703  M   1     CT       123             CT Brain          {1}
+Bowen^William^^Dr PAT004    19560807  M   1     CT       125             MRI Left Shoulder {1}
+
 
 ## PARAMETERS
 
@@ -284,23 +324,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## INPUTS
-
-### System.String
-
-{{ Fill in the Description }}
-
-## OUTPUTS
-
-### System.Object
-
-{{ Fill in the Description }}
-
-## NOTES
-
-{{ Fill in the Notes }}
-
 ## RELATED LINKS
 
-{{ Fill in the related links here }}
+- [Project Site](https://github.com/RobHolme/DicomTools#send-dwmlquery)
 

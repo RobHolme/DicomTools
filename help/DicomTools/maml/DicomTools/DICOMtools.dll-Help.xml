@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<helpItems xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" schema="maml" xmlns="http://msh">
+  <command:command>
+    <command:details>
+      <command:name>Get-DicomTag</command:name>
+      <maml:description>
+        <maml:para>Displays the DICOM tags from a DICOM file.</maml:para>
+      </maml:description>
+      <command:verb>Get</command:verb>
+      <command:noun>DicomTag</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para />
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-DicomTag</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>LiteralPath</maml:name>
+          <maml:description>
+            <maml:para>The literal path to a DICOM file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-DicomTag</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="0" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path of the DICOM file(s).
+Can include wildcards or regular expressions to specify multiple files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>LiteralPath</maml:name>
+        <maml:description>
+          <maml:para>The literal path to a DICOM file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String[]</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="0" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>The path of the DICOM file(s).
+Can include wildcards or regular expressions to specify multiple files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String[]</command:parameterValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para />
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#get-dicomtag</command:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Project site</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#get-dicomtag</command:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Send-CEcho</command:name>
+      <maml:description>
+        <maml:para>Sends a DICOM C-Echo to a DICOM endpoint.</maml:para>
+      </maml:description>
+      <command:verb>Send</command:verb>
+      <command:noun>CEcho</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para>Sends a DICOM C-Echo to a DICOM endpoint. Return the response, and time taken to respond (If successful).</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Send-CEcho</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The local (calling) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>The port number of the remote DICOM interface.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The remote (called) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>HostName</maml:name>
+        <maml:description>
+          <maml:para>Hostname or IP Address of DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+        <maml:name>LocalAETitle</maml:name>
+        <maml:description>
+          <maml:para>The local (calling) AE Title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+        <maml:name>Port</maml:name>
+        <maml:description>
+          <maml:para>The port number of the remote DICOM interface.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+        <maml:name>RemoteAETitle</maml:name>
+        <maml:description>
+          <maml:para>The remote (called) AE Title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>UseTLS</maml:name>
+        <maml:description>
+          <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para />
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>--------- Example 1 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt; Send-CEcho -HostName www.dicomserver.co.uk -Port 11112</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Hostname              Port  ResponseTime Status
+--------              ----  ------------ ------
+www.dicomserver.co.uk 11112 1587 ms      Success</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-cecho</command:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Project site</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-cecho</command:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Send-CFind</command:name>
+      <maml:description>
+        <maml:para>Send a C-FIND query to a DICOM interface, display the results returned.</maml:para>
+      </maml:description>
+      <command:verb>Send</command:verb>
+      <command:noun>CFind</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para>Send a C-FIND query to a DICOM interface, display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters.</maml:para>
+      <maml:para>Search by values provided in either PatientName, PatientID, StudyID, or AccessionNumber parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Send-CFind</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>EndDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or before this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The local (calling) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>Modality</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search to a modality type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>PatientName</maml:name>
+          <maml:description>
+            <maml:para>The name of the patient to search for.
+Can include '*' for wildcard searches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>The port number of the remote DICOM interface.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The remote (called) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>StartDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or after this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CFind</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>EndDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or before this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The local (calling) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>Modality</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search to a modality type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>PatientID</maml:name>
+          <maml:description>
+            <maml:para>The patient ID to search for.
+Can include '*' for wildcard searches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>The port number of the remote DICOM interface.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The remote (called) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>StartDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or after this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CFind</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>EndDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or before this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The local (calling) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>Modality</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search to a modality type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>The port number of the remote DICOM interface.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The remote (called) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>StartDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or after this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>StudyID</maml:name>
+          <maml:description>
+            <maml:para>The study instance ID to search for.
+Can include '*' for wildcard searches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CFind</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>AccessionNumber</maml:name>
+          <maml:description>
+            <maml:para>The Accession number to search for.
+Can include '*' for wildcard searches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>EndDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or before this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The local (calling) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>Modality</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search to a modality type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>The port number of the remote DICOM interface.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The remote (called) AE Title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>StartDate</maml:name>
+          <maml:description>
+            <maml:para>Constrain the search for studies acquired on or after this date.
+Accepts any string that can be parsed as a date.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>AccessionNumber</maml:name>
+        <maml:description>
+          <maml:para>The Accession number to search for.
+Can include '*' for wildcard searches.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+        <maml:name>EndDate</maml:name>
+        <maml:description>
+          <maml:para>Constrain the search for studies acquired on or before this date.
+Accepts any string that can be parsed as a date.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>HostName</maml:name>
+        <maml:description>
+          <maml:para>Hostname or IP Address of DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+        <maml:name>LocalAETitle</maml:name>
+        <maml:description>
+          <maml:para>The local (calling) AE Title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>Modality</maml:name>
+        <maml:description>
+          <maml:para>Constrain the search to a modality type.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>PatientID</maml:name>
+        <maml:description>
+          <maml:para>The patient ID to search for.
+Can include '*' for wildcard searches.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>PatientName</maml:name>
+        <maml:description>
+          <maml:para>The name of the patient to search for.
+Can include '*' for wildcard searches.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+        <maml:name>Port</maml:name>
+        <maml:description>
+          <maml:para>The port number of the remote DICOM interface.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+        <maml:name>RemoteAETitle</maml:name>
+        <maml:description>
+          <maml:para>The remote (called) AE Title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+        <maml:name>StartDate</maml:name>
+        <maml:description>
+          <maml:para>Constrain the search for studies acquired on or after this date.
+Accepts any string that can be parsed as a date.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>StudyID</maml:name>
+        <maml:description>
+          <maml:para>The study instance ID to search for.
+Can include '*' for wildcard searches.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>The timeout in seconds to wait for DICOM association, or a response from the DICOM service once a request has been submitted.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+        <maml:name>UseTLS</maml:name>
+        <maml:description>
+          <maml:para>Negiotiate a TLS secured connection (the remote DICOM interface must support TLS secured connections).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para />
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>--------- EXAMPLE 1 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -PatientName test</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PatientName  PatientID  BirthDate Sex Modality StudyDate              AccessionNumber StudyInstanceID
+-----------  ---------  --------- --- -------- ---------              --------------- ---------------
+test^test    EkeaB142dw 20210708  M   DOC      15/07/2021 12:00:00 AM                 1.2.276.0.7230010.3.1.2.8323328.16910.16…
+test^test    EkeaB142dw 20210708  M   DOC      15/07/2021 12:00:00 AM                 1.2.276.0.7230010.3.1.2.8323328.18104.16…
+test^test    EkeaB142dw 20210708  M   DOC      15/07/2021 12:00:00 AM                 1.2.276.0.7230010.3.1.2.8323328.18673.16…
+test         3          20210616  O   SC       13/01/2021 10:13:51 AM                 2.25.12671083270627443311864223603381287…
+test         3          20210616  O   SC       13/01/2021 10:13:51 AM                 2.25.22697510870666633359788882595239852…
+test         3          20210616  O   SC       17/07/2021 12:20:25 PM                 2.25.15048971584590926188919414102281229…
+Test^Patient 0          19600709  F   OAM      9/07/2020 11:31:11 AM                  1.2.276.0.75.2.1.11.1.1.200709113729721.…</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Find all patients where Patient Name is 'Test'</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 2 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -PatientID 123*</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PatientName    PatientID  BirthDate Sex Modality StudyDate             AccessionNumber StudyInstanceID
+-----------    ---------  --------- --- -------- ---------             --------------- ---------------
+*001           1234567890 20150511  F   CR       11/05/2015 4:26:38 AM 19035189        1.2.826.0.1.3680043.6.98861.89036.20150…
+DEMO_RECORDING 123456                   XA       24/08/2021 3:22:41 PM                 2.25.1788281389745095966601891702358043…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:06 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:12 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:14 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:15 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:16 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:03:18 PM                  1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       2/07/2021 2:10:58 PM  7654321         1.2.826.0.1.3680043.2.891.113.202107021…
+Tester^Test    12345      19850202  M   ES       19/07/2021 9:34:53 AM                 1.2.826.0.1.3680043.2.891.113.202107190…</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Find all patients with Patient ID starting with '123'</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 3 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -PatientName * -Modality CT -startDate 'Jan 1 2020' -EndDate '31/12/2020'</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PatientName PatientID BirthDate Sex Modality StudyDate             AccessionNumber StudyInstanceID
+----------- --------- --------- --- -------- ---------             --------------- ---------------
+.           139091                  CT       28/01/2020 5:29:09 PM                 1.3.6.1.4.1.5962.99.1.822597906.190419455.1…
+.           139091                  CT       28/01/2020 5:29:09 PM                 1.3.6.1.4.1.5962.99.1.831748304.238282405.1…
+.           139091                  CT       5/02/2020 2:47:03 PM                  1.3.6.1.4.1.5962.99.1.822597906.190419455.1…
+.           139091                  CT       13/02/2020 9:08:15 AM                 1.3.6.1.4.1.5962.99.1.822597906.190419455.1…
+Anonymous   Anonymous               CT       9/12/2020 8:34:04 PM                  2.16.840.1.114540.200114023.27924</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Find all CT scans acquired from 1 Jan 2020 through to 31 Dec 2020</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 4 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt; Send-CFind -HostName www.dicomserver.co.uk -Port 11112 -StudyID 1.2.826.0.1.3680043.2.891.113.20210702141058064482710</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PatientName PatientID BirthDate Sex Modality StudyDate            AccessionNumber StudyInstanceID
+----------- --------- --------- --- -------- ---------            --------------- ---------------
+Tester^Test 12345     19850202  M   ES       2/07/2021 2:10:58 PM 7654321         1.2.826.0.1.3680043.2.891.113.20210702141058064482710</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Find patient details for Study Instance ID of '1.2.826.0.1.3680043.2.891.113.20210702141058064482710'</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-cfind</command:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Project site</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-cfind</command:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Send-CGet</command:name>
+      <maml:description>
+        <maml:para>Send a DICOM C-GET to retrieve images from a remote host.</maml:para>
+      </maml:description>
+      <command:verb>Send</command:verb>
+      <command:noun>CGet</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para />
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Send-CGet</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>OutputDirectory</maml:name>
+          <maml:description>
+            <maml:para>The output directory to save retrieved DICOM files</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>StudyInstanceUID</maml:name>
+          <maml:description>
+            <maml:para>The Study Instance UID to retrieve</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CGet</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>OutputDirectory</maml:name>
+          <maml:description>
+            <maml:para>The output directory to save retrieved DICOM files</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>SeriesInstanceUID</maml:name>
+          <maml:description>
+            <maml:para>The Series Instance UID to retrieve</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CGet</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>OutputDirectory</maml:name>
+          <maml:description>
+            <maml:para>The output directory to save retrieved DICOM files</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>SOPInstanceUID</maml:name>
+          <maml:description>
+            <maml:para>The SOP Instance UID to retrieve</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>HostName</maml:name>
+        <maml:description>
+          <maml:para>Hostname or IP Address of DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+        <maml:name>LocalAETitle</maml:name>
+        <maml:description>
+          <maml:para>The client calling AE title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>OutputDirectory</maml:name>
+        <maml:description>
+          <maml:para>The output directory to save retrieved DICOM files</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+        <maml:name>Port</maml:name>
+        <maml:description>
+          <maml:para>Port number of remote DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+        <maml:name>RemoteAETitle</maml:name>
+        <maml:description>
+          <maml:para>The server called AE title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>SeriesInstanceUID</maml:name>
+        <maml:description>
+          <maml:para>The Series Instance UID to retrieve</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>SOPInstanceUID</maml:name>
+        <maml:description>
+          <maml:para>The SOP Instance UID to retrieve</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>StudyInstanceUID</maml:name>
+        <maml:description>
+          <maml:para>The Study Instance UID to retrieve</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>The timeout in seconds to wait for a response</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+        <maml:name>UseTLS</maml:name>
+        <maml:description>
+          <maml:para>Use TLS to secure the connection</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para />
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Project site</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-cget</command:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Send-CMove</command:name>
+      <maml:description>
+        <maml:para>Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.</maml:para>
+      </maml:description>
+      <command:verb>Send</command:verb>
+      <command:noun>CMove</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para>Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Send-CMove</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>MoveDestination</maml:name>
+          <maml:description>
+            <maml:para>The AE title of the destination to send images to</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>StudyInstanceUID</maml:name>
+          <maml:description>
+            <maml:para>The Study Instance UID to retrieve</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CMove</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>MoveDestination</maml:name>
+          <maml:description>
+            <maml:para>The AE title of the destination to send images to</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>SeriesInstanceUID</maml:name>
+          <maml:description>
+            <maml:para>The Series Instance UID to retrieve</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Send-CMove</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>MoveDestination</maml:name>
+          <maml:description>
+            <maml:para>The AE title of the destination to send images to</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>SOPInstanceUID</maml:name>
+          <maml:description>
+            <maml:para>The SOP Instance UID to retrieve</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>HostName</maml:name>
+        <maml:description>
+          <maml:para>Hostname or IP Address of DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+        <maml:name>LocalAETitle</maml:name>
+        <maml:description>
+          <maml:para>The client calling AE title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>MoveDestination</maml:name>
+        <maml:description>
+          <maml:para>The AE title of the destination to send images to</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+        <maml:name>Port</maml:name>
+        <maml:description>
+          <maml:para>Port number of remote DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+        <maml:name>RemoteAETitle</maml:name>
+        <maml:description>
+          <maml:para>The server called AE title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>SeriesInstanceUID</maml:name>
+        <maml:description>
+          <maml:para>The Series Instance UID to retrieve</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>SOPInstanceUID</maml:name>
+        <maml:description>
+          <maml:para>The SOP Instance UID to retrieve</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>StudyInstanceUID</maml:name>
+        <maml:description>
+          <maml:para>The Study Instance UID to retrieve</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>The timeout in seconds to wait for a response</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+        <maml:name>UseTLS</maml:name>
+        <maml:description>
+          <maml:para>Use TLS to secure the connection</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para />
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Project site</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-cmove</command:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Send-DMWLQuery</command:name>
+      <maml:description>
+        <maml:para>Query a DICOM Modality Work List (DMWL), display the results returned.</maml:para>
+      </maml:description>
+      <command:verb>Send</command:verb>
+      <command:noun>DMWLQuery</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para>Query a DICOM Modality Work List (DMWL), display the results returned. Default values for LocalAETitle and RemoteAETitle used if not supplied via the parameters. The default results will contain Patient details, to access scheduled procedure steps expand the 'ProcedureSteps' property returned.</maml:para>
+      <maml:para>Restrict search by PatientName, PatientID, or Modality parameters. Include * search string for wildcard searches. Warning: A single search value of * will return all studies.</maml:para>
+      <maml:para>The StartDateTime and EndDateTime parameters can be supplied to constrain the search to exams scheduled between these dates. Both parameters must be supplied to create a date range. Any text value can be entered providing it can be recognised as a Date or DateTime value. e.g. "1997-09-18 20:00" or "18 Sept 97 8pm" would be accepted.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Send-DMWLQuery</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+          <maml:name>EndDateTime</maml:name>
+          <maml:description>
+            <maml:para>Include studies from or after this date YYYYMMDD</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>HostName</maml:name>
+          <maml:description>
+            <maml:para>Hostname or IP Address of DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>LocalAETitle</maml:name>
+          <maml:description>
+            <maml:para>The client calling AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+          <maml:name>Modality</maml:name>
+          <maml:description>
+            <maml:para>Constrain results to specific modalities</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+          <maml:name>PatientID</maml:name>
+          <maml:description>
+            <maml:para>Include studies scheduled for this Patient ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+          <maml:name>PatientName</maml:name>
+          <maml:description>
+            <maml:para>Include studies scheduled for this Patient name</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+          <maml:name>Port</maml:name>
+          <maml:description>
+            <maml:para>Port number of remote DICOM service</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+          <maml:name>RemoteAETitle</maml:name>
+          <maml:description>
+            <maml:para>The server called AE title</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+          <maml:name>StartDateTime</maml:name>
+          <maml:description>
+            <maml:para>Include studies scheduled from or after this date (and time)</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="11" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>The timeout in seconds to wait for a response</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+          <maml:name>UseTLS</maml:name>
+          <maml:description>
+            <maml:para>Use TLS to secure the connection</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="9" aliases="none">
+        <maml:name>EndDateTime</maml:name>
+        <maml:description>
+          <maml:para>Include studies from or after this date YYYYMMDD</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>HostName</maml:name>
+        <maml:description>
+          <maml:para>Hostname or IP Address of DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="none">
+        <maml:name>LocalAETitle</maml:name>
+        <maml:description>
+          <maml:para>The client calling AE title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="7" aliases="none">
+        <maml:name>Modality</maml:name>
+        <maml:description>
+          <maml:para>Constrain results to specific modalities</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="6" aliases="none">
+        <maml:name>PatientID</maml:name>
+        <maml:description>
+          <maml:para>Include studies scheduled for this Patient ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="5" aliases="none">
+        <maml:name>PatientName</maml:name>
+        <maml:description>
+          <maml:para>Include studies scheduled for this Patient name</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="none">
+        <maml:name>Port</maml:name>
+        <maml:description>
+          <maml:para>Port number of remote DICOM service</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="4" aliases="none">
+        <maml:name>RemoteAETitle</maml:name>
+        <maml:description>
+          <maml:para>The server called AE title</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="8" aliases="none">
+        <maml:name>StartDateTime</maml:name>
+        <maml:description>
+          <maml:para>Include studies scheduled from or after this date (and time)</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="11" aliases="none">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>The timeout in seconds to wait for a response</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Int32</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="10" aliases="none">
+        <maml:name>UseTLS</maml:name>
+        <maml:description>
+          <maml:para>Use TLS to secure the connection</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Management.Automation.SwitchParameter</command:parameterValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para />
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>--------- Example 1 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>Query DICOM modality worklist:</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PS&gt; Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PatientName           PatientID BirthDate Sex Steps Modality  AccessionNumber StudyDescription  ProcedureSteps
+-----------           --------- --------- --- ----- --------  --------------- ----------------  --------------
+Bowen^William^^Dr     PAT004    19560807  M   1     MR        125             CT Left Shoulder  {1}
+Bloggs^Joe^^Mr        PAT001    19450703  M   1     CT        123             CT Brain          {1}
+Williams^Jane^^Mrs    PAT002    19830806  F   1     MR        124             MRI Left Shoulder {1}
+Smith^Emma^^Miss      PAT003    19480603  F   1     RF        126             Left Leg DSA      {1}
+Bowen^William^^Dr     PAT004    19560807  M   1     CT        125             MRI Left Shoulder {1}
+Bowen^William^^Dr     PAT004    19560807  M   1     US        125             US Left Shoulder  {1}</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- Example 2 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>Query DICOM modality worklist, display the procedure steps for the 3rd result returned:</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PS&gt; (Send-DMWLQuery -HostName www.dicomserver.co.uk -Port 11112)[2].procedureSteps</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>StepID              : 1
+Modality            : MR
+PerformingPhysician : Evans^^^Dr
+StepDateTime        : 1/01/2001 12:30:00 PM
+StepDescription     : MRI Left Shoulder</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- Example 3 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>Query patients with a scheduled CT exam between 4pm and 8pm on 18 September 1997:</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PS&gt; Send-DMWLQuery  -HostName www.dicomserver.co.uk -Port 11112 -StartDateTime "Sept 18 1997 1pm" -EndDateTime "1997-09-18 20:00"  -Modality CT</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>PatientName       PatientID BirthDate Sex Steps Modality AccessionNumber StudyDescription  ProcedureSteps
+-----------       --------- --------- --- ----- -------- --------------- ----------------  --------------
+Bowen^William^^Dr PAT004    19560807  M   1     MR       125             CT Left Shoulder  {1}
+Bloggs^Joe^^Mr    PAT001    19450703  M   1     CT       123             CT Brain          {1}
+Bowen^William^^Dr PAT004    19560807  M   1     CT       125             MRI Left Shoulder {1}</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Project Site</maml:linkText>
+        <command:uri>https://github.com/RobHolme/DicomTools#send-dwmlquery</command:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+</helpItems>

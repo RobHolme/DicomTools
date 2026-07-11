@@ -13,7 +13,7 @@ title: Send-CGet
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Send a DICOM C-GET to retrieve images from a remote host.
 
 ## SYNTAX
 
@@ -41,20 +41,9 @@ Send-CGet [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-Remot
  [<CommonParameters>]
 ```
 
-## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
-
 ## DESCRIPTION
 
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-
-{{ Add example description here }}
+Send a DICOM C-GET to retrieve images from a remote host. Save DICOM file to local directory.
 
 ## PARAMETERS
 
@@ -279,23 +268,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## INPUTS
-
-### System.String
-
-{{ Fill in the Description }}
-
-## OUTPUTS
-
-### System.Object
-
-{{ Fill in the Description }}
-
-## NOTES
-
-{{ Fill in the Notes }}
-
 ## RELATED LINKS
 
-{{ Fill in the related links here }}
+- [Project site](https://github.com/RobHolme/DicomTools#send-cget)
 

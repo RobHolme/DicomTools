@@ -13,7 +13,7 @@ title: Send-CMove
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.
 
 ## SYNTAX
 
@@ -41,20 +41,11 @@ Send-CMove [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-Remo
  [<CommonParameters>]
 ```
 
-## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
-
 ## DESCRIPTION
 
-{{ Fill in the Description }}
+Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.
 
 ## EXAMPLES
-
-### Example 1
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -278,23 +269,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## INPUTS
-
-### System.String
-
-{{ Fill in the Description }}
-
-## OUTPUTS
-
-### System.Object
-
-{{ Fill in the Description }}
-
-## NOTES
-
-{{ Fill in the Notes }}
-
 ## RELATED LINKS
 
-{{ Fill in the related links here }}
+- [Project site](https://github.com/RobHolme/DicomTools#send-cmove)
 

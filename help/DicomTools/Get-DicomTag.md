@@ -29,16 +29,9 @@ Get-DicomTag -LiteralPath <string[]> [<CommonParameters>]
 Get-DicomTag [-Path] <string[]> [<CommonParameters>]
 ```
 
-## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
-
 ## DESCRIPTION
 
 Displays the DICOM tags from a DICOM file.
-
-## EXAMPLES
 
 ## PARAMETERS
 
@@ -94,16 +87,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## INPUTS
-
-### System.String[]
-
-{{ Fill in the Description }}
-
-## OUTPUTS
-
-## NOTES
-
 ## RELATED LINKS
 
-- [Projet site](https://github.com/RobHolme/DicomTools#get-dicomtag)
+- [Project site](https://github.com/RobHolme/DicomTools#get-dicomtag)
