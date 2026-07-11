@@ -246,7 +246,14 @@ __-Path <string>__ The path of the DICOM file(s). Can include wildcards or regul
 Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.
 
 ```Powershell
-Send-CMove [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-MoveDestination] <string> [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+    Send-CMove [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>]
+    [-MoveDestination] <string> [-StudyInstanceUID] <string> [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+
+    Send-CMove [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>]
+    [-MoveDestination] <string> [-SeriesInstanceUID] <string> [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+
+    Send-CMove [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>]
+    [-MoveDestination] <string> [-SOPInstanceUID] <string> [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
 ```
 
 ### Parameters
