@@ -1,6 +1,6 @@
 /* Filename:    SendCGet.cs
  *
- * Author:      Rob Holme (rob@holme.com.au)
+ * Author:      Sami Altamimi
  *
  * Notes:       Implements a powershell CmdLet to send a DICOM C-GET to retrieve images from a remote host.
  *
