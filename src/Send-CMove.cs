@@ -1,6 +1,6 @@
 /* Filename:    SendCMove.cs
  *
- * Author:      Rob Holme (rob@holme.com.au)
+ * Author:      Sami Altamimi
  *
  * Notes:       Implements a powershell CmdLet to send a DICOM C-MOVE to instruct a remote host
  *              to send images to a specified move destination AE title.

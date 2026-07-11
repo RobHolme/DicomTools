@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <EnableDefaultItems>true</EnableDefaultItems>
-    <Version>1.4.2</Version>
+    <Version>1.4.3</Version>
     <Authors>Rob Holme</Authors>
     <Product>DICOM Testing Module for Powershell</Product>
-    <FileVersion>1.4.2.0</FileVersion>
+    <FileVersion>1.4.3.0</FileVersion>
     <Description>Powershell module for DICOM testing</Description>
     <RepositoryUrl>https://github.com/RobHolme/DicomTools</RepositoryUrl>
     <PlatformTarget>x64</PlatformTarget>
@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="fo-dicom" Version="5.1.1" />
+    <PackageReference Include="fo-dicom" Version="5.2.6" />
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.1"/>
   </ItemGroup>
 
