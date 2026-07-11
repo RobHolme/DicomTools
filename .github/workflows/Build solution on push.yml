@@ -20,4 +20,4 @@ jobs:
 
       # build .Net Core solution
       - name: Build .net core 10.0 solution
-        run: dotnet publish --configuration release --framework net10.0 --output .\module\lib\
+        run: dotnet publish --configuration release --framework net10.0 --output .\module\DicomTools\lib\

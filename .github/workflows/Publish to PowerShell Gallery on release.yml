@@ -19,7 +19,7 @@ jobs:
 
       # build .Net Core solution
       - name: Build .net core 10.0 solution
-        run: dotnet publish --configuration release --framework net10.0 --output .\module\lib\
+        run: dotnet publish --configuration release --framework net10.0 --output .\module\DicomTools\lib\
 
       # publish to powershellgallery.com
       # secrets.PS_GALLERY_KEY is the API key for the PowerShell Gallery.
@@ -28,4 +28,4 @@ jobs:
         env:
           NUGET_KEY: ${{ secrets.PS_GALLERY_KEY }}
         shell: pwsh
-        run: Publish-Module -path .\module -NuGetApiKey $env:NUGET_KEY -Verbose
+        run: Publish-Module -path .\module\DicomTools\ -NuGetApiKey $env:NUGET_KEY -Verbose
