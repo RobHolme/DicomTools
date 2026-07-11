@@ -15,17 +15,32 @@ This PowerShell module is a small collection of CmdLets to test DICOM interfaces
 This module uses the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-dicom/fo-dicom
 
 # Installation 
+
+Supports Microsoft PowerShell 7+ only.
+
+## PSGallery Install
+
+```Install-PSResource -Name DicomTools```
+
+or
+
+```Install-Module -Name DicomTools```
+
+## Manual Install 
 Either build the solution (instructions below), or download the latest release from https://github.com/RobHolme/DicomTools/releases. 
 
 Copy the contents of the /module folder (or extract the files from the downloaded release) to a folder named 'DicomTools' in the Powershell module path (use $env:PSModulePath to list all paths). 
 
-Supports Microsoft PowerShell 7+ only.
+# Build
+
 ## Build instructions
-Install the .Net Core 6 SDK (https://dotnet.microsoft.com/download/visual-studio-sdks). 
+Install the .Net Core 10 SDK (https://dotnet.microsoft.com/en-us/download/dotnet/10.0). 
 
 Run ```.\publish.cmd```
 
-The build module will be copied to the /Module folder.
+The build module will be copied to the .\Module\DicomTools\ folder. Copy this folder to your $env:PSmodulePath for use in all PowerShell sessions, or use ```import-module .\Module\DicomTools\DicomTools.psd1``` for current session only. 
+
+> The script included in the repo ```install.ps1``` will automate the build and copy the module to either the All Users or Current User module folder. Run ```get-help .\install.ps1``` for more information and parameter descriptions. This assumes the required .Net SDK is installed.
 
 # CmdLet Usage 
 
