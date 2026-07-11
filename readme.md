@@ -8,6 +8,7 @@ This PowerShell module is a small collection of CmdLets to test DICOM interfaces
 * __Send-CFind__: send a DICOM C-Find request to a DICOM endpoint, display the results returned.
 * __Send-DWMLQuery__: query a DICOM Modality Worklist (experimental - may not be reliable)
 * __Get-DicomTag__: list the DICOM tags from a DICOM file.
+* __Send-CMove__: send the DICOM images to the target AE
 
 
 This module uses the Fellow OAK DICOM (fo-dicom) library. https://github.com/fo-dicom/fo-dicom
@@ -223,6 +224,51 @@ Bowen^William^^Dr PAT004    19560807  M   1     MR       125             CT Left
 Bloggs^Joe^^Mr    PAT001    19450703  M   1     CT       123             CT Brain          {1}
 Bowen^William^^Dr PAT004    19560807  M   1     CT       125             MRI Left Shoulder {1}
 ```
+
+
+## Get-DicomTag
+Displays the DICOM tags from a DICOM file. 
+
+```Powershell
+Get-DicomTag -LiteralPath <string[]> [<CommonParameters>]
+
+Get-DicomTag [-Path] <string[]> [<CommonParameters>]
+```
+
+### Parameters
+__-LiteralPath <string>__ The literal path to the DICOM file.
+
+__-Path <string>__ The path of the DICOM file(s). Can include wildcards or regular expressions to specify multiple files.  
+
+
+
+## Send-CMove
+Send a DICOM C-MOVE to instruct a remote host to send images to a specified move destination AE title.
+
+```Powershell
+Send-CMove [-HostName] <string> [-Port] <int> [[-LocalAETitle] <string>] [[-RemoteAETitle] <string>] [-MoveDestination] <string> [[-UseTLS]] [[-Timeout] <int>] [<CommonParameters>]
+```
+
+### Parameters
+__-HostName <string>__ The hostname of the DICOM interface to query.
+
+__-Port <int>__ The TCP port number of the DICOM interface.
+
+__-LocalAETitle <string>__  The caller AE title. Defaults to 'DICOMTOOLS-SCU' if no parameter supplied.
+
+__-RemoteAETitle <string>__ The called AE title. Defaults to 'ANY-SCP' if no parameter supplied.
+
+__-MoveDestination <string>__ The AE title of the destination to send images to.
+
+__-StudyInstanceUID <string>__ The Study Instance UID to retrieve.
+
+__-SeriesInstanceUID <string>__ The Series Instance UID to retrieve.
+
+__-SOPInstanceUID <string>__ The SOP Instance UID to retrieve.
+
+__-UseTLS__ Use TLS to secure the connection (if supported by the remote DICOM service).
+
+__-Timeout <int>__ The timout in seconds before the DICOM association is cancelled (or time to wait for a response to the C-FIND if association was successful).
 
 
 ## Get-DicomTag
