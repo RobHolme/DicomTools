@@ -21,3 +21,4 @@
 * 1.4.0 - Removed support for .Net Framework. Only .Net Core is now supported (PowerShell v6+)          
 * 1.4.1 - Moved to .Net 6.0. No functional changes. 
 * 1.4.2 - Updated fo-dicom library to 5.1.1
+* 1.4.3 - Updated fo-dicom library to 5.2.6. Targeting .Net10
